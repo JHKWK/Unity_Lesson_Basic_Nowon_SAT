@@ -1,0 +1,15 @@
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.csproj.AssemblyReference.cache
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.AssemblyInfoInputs.cache
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.AssemblyInfo.cs
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.csproj.CoreCompileInputs.cache
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\bin\Debug\net6.0\UnityLesson_CSharp_ProgramClass.exe
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\bin\Debug\net6.0\UnityLesson_CSharp_ProgramClass.deps.json
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\bin\Debug\net6.0\UnityLesson_CSharp_ProgramClass.runtimeconfig.json
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\bin\Debug\net6.0\UnityLesson_CSharp_ProgramClass.dll
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\bin\Debug\net6.0\ref\UnityLesson_CSharp_ProgramClass.dll
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\bin\Debug\net6.0\UnityLesson_CSharp_ProgramClass.pdb
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.dll
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\ref\UnityLesson_CSharp_ProgramClass.dll
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.pdb
+C:\Users\JH\source\repos\UnityLesson_CSharp_ProgramClass\UnityLesson_CSharp_ProgramClass\obj\Debug\net6.0\UnityLesson_CSharp_ProgramClass.genruntimeconfig.cache
