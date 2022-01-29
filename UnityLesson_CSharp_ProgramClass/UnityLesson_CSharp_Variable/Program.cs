@@ -12,7 +12,7 @@ namespace UnityLesson_CSharp_Variable
     class Person
     {
         // 변수 선언 형태 : 타입 (자료형) 변수이름(대소문자 구분 함)
-
+        //
         // Person 클래스의 멤버 변수 (필드)
         int age; // int->정수형 나이                int   : 4byte의 정수 -2147483648 ~ 2147483647
         float height; // float -> 실수형 키         float : 4byte의 실수 
