@@ -1,0 +1,16 @@
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\bin\Debug\net5.0\복습.exe
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\bin\Debug\net5.0\복습.deps.json
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\bin\Debug\net5.0\복습.runtimeconfig.json
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\bin\Debug\net5.0\복습.runtimeconfig.dev.json
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\bin\Debug\net5.0\복습.dll
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\bin\Debug\net5.0\ref\복습.dll
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\bin\Debug\net5.0\복습.pdb
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.csproj.AssemblyReference.cache
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.AssemblyInfoInputs.cache
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.AssemblyInfo.cs
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.csproj.CoreCompileInputs.cache
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.dll
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\ref\복습.dll
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.pdb
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\복습\obj\Debug\net5.0\복습.genruntimeconfig.cache

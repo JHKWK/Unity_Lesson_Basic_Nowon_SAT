@@ -100,7 +100,12 @@
       "ProjectGuid": "22bf0562-0343-4642-9e5d-2e5bd2fdd6c0",
       "DisplayName": "UnityLesson_CSharp_Collection",
       "ColorIndex": 2
+    },
+    "654b89c1-36ca-41c0-9c46-d018f85bc633": {
+      "ProjectGuid": "654b89c1-36ca-41c0-9c46-d018f85bc633",
+      "DisplayName": "복습",
+      "ColorIndex": 3
     }
   },
-  "NextColorIndex": 3
+  "NextColorIndex": 4
 }
