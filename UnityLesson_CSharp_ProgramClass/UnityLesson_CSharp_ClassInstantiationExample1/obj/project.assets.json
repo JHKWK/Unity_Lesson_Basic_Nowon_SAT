@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_ClassInstantiationExample1\\UnityLesson_CSharp_ClassInstantiationExample1.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_ClassInstantiationExample1\\UnityLesson_CSharp_ClassInstantiationExample1.csproj",
       "projectName": "UnityLesson_CSharp_ClassInstantiationExample1",
-      "projectPath": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_ClassInstantiationExample1\\UnityLesson_CSharp_ClassInstantiationExample1.csproj",
+      "projectPath": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_ClassInstantiationExample1\\UnityLesson_CSharp_ClassInstantiationExample1.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_ClassInstantiationExample1\\obj\\",
+      "outputPath": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_ClassInstantiationExample1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

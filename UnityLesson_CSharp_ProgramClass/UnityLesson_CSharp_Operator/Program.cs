@@ -10,6 +10,8 @@ namespace UnityLesson_CSharp_Operator
             int b = 5;
             int c = 0;
 
+            c = OperatorMethods.증가(560);
+            Console.WriteLine(c);
 
             // ==========================================================================================================
             // 산술연산
@@ -168,14 +170,14 @@ namespace UnityLesson_CSharp_Operator
     // ex 플레이어가 IDLE 일 때 귀환 누르면 귀환 시작
     // 피격상태/공격상태일떄는 귀환 누르면 귀환 안되게 하는 조건을
     // 아래 플레이어 상태에 따라서 나눈다
-    [Flags]
-    public enum e_FSM
-    {
-        IDEL = 0
-        피격당한 상태 = 1<<0,
-        공격중인 상태 = 1<<1,
-        STATE_3=1<<2,
-        STATE_4=1<<3,
-    }
+    //[Flags]
+    //public enum e_FSM
+    //{
+    //    IDEL = 0
+    //    피격당한 상태 = 1<<0,
+    //    공격중인 상태 = 1<<1,
+    //    STATE_3=1<<2,
+    //    STATE_4=1<<3,
+    //}
 
 }

@@ -23,11 +23,21 @@ namespace UnityLesson_CSharp_Operator
         {
             return a * b;
         }
-
-        static public int 나누기(int a, int b)
+        // 정수형 실수형 계산의 경우
+        static public int 나누기(int a, int b)  //실수형나누기
         {
             return a / b;
         }
+        // 오버로드 (overload)
+        // 인자의 종류만 다를 경우 함수이름을 하나로 쓸 수 있다(visual studio 기능)
+        static public float 나누기(float a, float b) // 정수형 나누기
+        {
+            return a / b;
+        }
+     
+       
+
+
 
         static public int 나머지(int a, int b)
         {
@@ -36,12 +46,17 @@ namespace UnityLesson_CSharp_Operator
 
         static public int 증가(int a)
         {
-            return a++;
+            //    return a++; 증가 연산자는 문장이 종료되고 난 후 증가 연산을 하기때문에 return시 초기값 4를 내놓고 증가시키고 함수가 종료되며 소멸
+            //                무용지물
+            a++;
+            return a;
+ 
         }
 
-        static public int 증감(int a)
+        static public int 감소(int a)
         {
-            return a--;
+            a--;
+            return a;
         }
 
         //관계연산
@@ -71,30 +86,61 @@ namespace UnityLesson_CSharp_Operator
         }
 
         //논리연산
-        static public bool Or(bool a, bool b)
+        static public bool Or(bool A, bool B)
+        {
+            return A | B;
+        }
+        static public bool Xor(bool A, bool B)
+        {
+            return A ^ B;
+        }
+        static public bool And(bool A, bool B)
+        {
+            return A & B;
+        }
+        static public bool Not(bool A, bool B)
+        {
+            return !A;
+        }
+
+        static public bool ConditionalOr(bool A, bool B)
+        {
+            return A || B;
+        }
+        static public bool ConditionalAnd(bool A, bool B)
+        {
+            return A && B;
+        }
+
+        //비트연산
+        //
+
+        static public int 비트or(int a, int b) 
         {
             return a | b;
         }
-        static public bool Xor(bool a, bool b)
-        {
-            return a ^ b;
-        }
-        static public bool And(bool a, bool b)
+
+        static public int 비트and(int a, int b)
         {
             return a & b;
         }
-        static public bool Not(bool a, bool b)
+
+        static public int 비트not(int a)
         {
-            return !a;
+            return ~a;
+        }
+        static public int 비트xor(int a, int b)
+        {
+            return a ^ b;
         }
 
-        static public bool ConditionalOr(bool a, bool b)
+        static public int 비트ShiftLeft(int a, int howManyShift)
         {
-            return a || b;
+            return a << howManyShift;
         }
-        static public bool ConditionalAnd(bool a, bool b)
+        static public int 비트shiftright(int a, int howmanyshift)
         {
-            return a && b;
+            return a >> howmanyshift;
         }
     }
 }

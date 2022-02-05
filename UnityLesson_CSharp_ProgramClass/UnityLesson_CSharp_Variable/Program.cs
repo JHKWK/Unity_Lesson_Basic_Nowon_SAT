@@ -6,7 +6,7 @@ namespace UnityLesson_CSharp_Variable
     {
         static void Main(string[] args)
         {
-            asdf
+            
         }
     }
     class Person
@@ -19,7 +19,7 @@ namespace UnityLesson_CSharp_Variable
         bool isResting; // 논리형 쉬고있는가?       bool  : 1 byte 논리
         char genderChar; // 문자형 성별문자         char  : 2 byte 문자
         string name; //문자열형 이름                string: 문자갯수 * 2 byte 문자열
-        short
+        short num; //숫자
         // bit(비트) = 한자리 이진수 ( 0과 1, 정보처리의 최소 단위)
         // byte(바이트) = 8bit (CPU의 데이터 처리 최소 단위)
         // 4 byte = 4*8 bit = 32 bit

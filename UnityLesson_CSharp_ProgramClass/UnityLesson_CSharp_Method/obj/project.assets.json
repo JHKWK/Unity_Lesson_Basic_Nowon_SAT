@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Method\\UnityLesson_CSharp_Method.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Method\\UnityLesson_CSharp_Method.csproj",
       "projectName": "UnityLesson_CSharp_Method",
-      "projectPath": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Method\\UnityLesson_CSharp_Method.csproj",
+      "projectPath": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Method\\UnityLesson_CSharp_Method.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Method\\obj\\",
+      "outputPath": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Method\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

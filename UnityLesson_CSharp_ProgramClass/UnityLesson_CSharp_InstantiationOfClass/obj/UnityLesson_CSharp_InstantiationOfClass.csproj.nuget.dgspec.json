@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj": {}
+    "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj": {
+    "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj",
         "projectName": "UnityLesson_CSharp_InstantiationOfClass",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj",
+        "projectPath": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\UnityLesson_CSharp_InstantiationOfClass.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\obj\\",
+        "outputPath": "C:\\Users\\User\\Documents\\Github_kwk\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_InstantiationOfClass\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
