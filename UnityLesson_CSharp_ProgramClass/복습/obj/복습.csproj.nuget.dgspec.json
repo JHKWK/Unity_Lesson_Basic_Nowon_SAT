@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj",
         "projectName": "복습",
-        "projectPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj",
-        "packagesPath": "C:\\Users\\JH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\obj\\",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\복습.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\복습\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\JH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

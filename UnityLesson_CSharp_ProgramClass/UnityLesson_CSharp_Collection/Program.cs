@@ -33,8 +33,79 @@ namespace UnityLesson_CSharp_Collection
                 Console.WriteLine(num);
             }
             //------------------------------------------------------------------------------
+            //Dictionary
             //------------------------------------------------------------------------------
+            Dictionary<string,string>_dic=new Dictionary<string,string>();
+            _dic.Add("검사", "양손대검을 사용하여 물리공격을 하는 클래스");
+            _dic.Add("마법사", "지팡이를 사용하여 마법공격을 하는 클래스");
+            _dic.Add("수호자", "창과 방패를 사용하여 물리공격 및 방어 위주의 클래스");
+            //_dic.Remove("검사");
+            bool isSwordMasterExist = _dic.ContainsKey("검사");
+            if (isSwordMasterExist)
+            {
+                string tmpValue = _dic["검사"];
+                Console.WriteLine($"검사 : {tmpValue}");
+            }
+            else
+            {
+                Console.WriteLine("검사가 없습니다");
+            }
+            // dictionary 도 foreach 구문의 가능하다.
+            // dictionary 는 collection이고 
+            // dictionary 에서 keys를 가져오면 KeyCollection을 가져올 수 있고
+            // dictionary에서 values를 가져오면 ValueCollection을 가져올 수 있다.
+            // dictionary 자체도 key, value 각각도 foreach 구문이 가능하다.            
+
+            //dictionary를 foreach문 실행
+            foreach (KeyValuePair<string,string> sub in _dic)
+            {
+                string tmpKey = sub.Key;
+                string tmpValue = sub.Value;
+                Console.WriteLine($"{tmpKey} : {tmpValue}");
+                Console.WriteLine(sub);
+            }
+
+            //Keys를 foreach문 실행
+            foreach (string sub in _dic.Keys)
+            {
+                string tmpValue = _dic[sub];
+                Console.WriteLine($"{sub} : {tmpValue}");
+            }
+
+            //dictionary.Values를 foreach문 실행
+            foreach (string sub in _dic.Values)
+            {
+                Console.WriteLine(sub);
+            }
+
             //------------------------------------------------------------------------------
+            //Queue {List와 비슷하나, FIFO, First Input First Ouput 체계이다}
+            //------------------------------------------------------------------------------
+            Queue<int>_queue = new Queue<int>();
+            _queue.Enqueue(10);
+            _queue.Enqueue(20);
+            _queue.Enqueue(30);
+            //_queue.Dequeue(); // 파라미터를 넣지 않는다
+            Console.WriteLine(_queue.Peek()); // 가장 앞에있는 밸류 호출
+            Console.WriteLine(_queue.Dequeue());
+            Console.WriteLine(_queue.Peek());
+            Console.WriteLine(_queue.Dequeue());
+            Console.WriteLine(_queue.Peek());
+            Console.WriteLine(_queue.Dequeue());
+            //------------------------------------------------------------------------------
+            //Stack (List와 비슷하나, LIFO, Last Input First OUT체계 이다)
+            //------------------------------------------------------------------------------
+            Stack<int> _stack = new Stack<int>();
+            _stack.Push(11);
+            _stack.Push(22);
+            _stack.Push(33);
+            Console.WriteLine(_stack.Peek());
+            Console.WriteLine(_stack.Pop());
+            Console.WriteLine(_stack.Peek());
+            Console.WriteLine(_stack.Pop());
+            Console.WriteLine(_stack.Peek());
+            Console.WriteLine(_stack.Pop());
+
         }
     }            
 }

@@ -1,6 +1,10 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 namespace 복습
+
+
+
 {
     internal class Program
     {
@@ -23,8 +27,21 @@ namespace 복습
             foreach (Orc item in orcList1)
             {
                 item.OrcAction();
-            }            
+            }
+
+            Dictionary<Orc, string> _dic = new Dictionary<Orc, string>();
+            for (int i = 0; i < orcArray1.Length; i++)
+            {
+                _dic.Add(orcArray1[i], $"{i + 1}번째로 생성한 오크");
+                Console.WriteLine($"{orcArray1[i].name} : {_dic[orcArray1[i]]}");
+            }
+                
+
+
+
         }
+
+
         static private bool GetRandomBool()
         {
             Random randomBool = new Random();
@@ -62,4 +79,5 @@ namespace 복습
 
     }
 
-}
+} 
+

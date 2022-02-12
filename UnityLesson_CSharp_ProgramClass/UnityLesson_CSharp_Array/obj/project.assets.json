@@ -8,19 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\JH\\.nuget\\packages\\": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Array\\UnityLesson_CSharp_Array.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Array\\UnityLesson_CSharp_Array.csproj",
       "projectName": "UnityLesson_CSharp_Array",
-      "projectPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Array\\UnityLesson_CSharp_Array.csproj",
-      "packagesPath": "C:\\Users\\JH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Array\\obj\\",
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Array\\UnityLesson_CSharp_Array.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Array\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\JH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

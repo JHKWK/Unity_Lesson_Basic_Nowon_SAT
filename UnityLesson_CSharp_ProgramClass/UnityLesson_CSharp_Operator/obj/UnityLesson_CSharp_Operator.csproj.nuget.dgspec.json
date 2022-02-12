@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj",
         "projectName": "UnityLesson_CSharp_Operator",
-        "projectPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj",
-        "packagesPath": "C:\\Users\\JH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\obj\\",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\UnityLesson_CSharp_Operator.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_Operator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\JH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

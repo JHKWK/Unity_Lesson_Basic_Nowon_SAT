@@ -47,8 +47,9 @@ namespace UnityLesson_CSharp_ForLoopExample
         static private bool GetRandomBool()
         {
             Random random = new Random();
-            int randomInt = random.Next(0, 2); // 최소값 ~ 최대값-1  0부터 시작하는 2개의 숫자
-            bool randomBool = Convert.ToBoolean(randomInt); // 0은 false , 0이 아니면 true
+            // int randomInt = random.Next(0, 2); // 최소값 ~ 최대값-1  0부터 시작하는 2개의 숫자
+            // bool randomBool = Convert.ToBoolean(randomInt); // 0은 false , 0이 아니면 true
+            bool randomBool = random.Next(0, 1) < 0.5f;
             return randomBool;
         }
     }
