@@ -1,8 +1,8 @@
 ﻿struct EquipmentAblility
 {
-    int _ATK;
-    int _DEF;
-    int _HP;
-    int _MP;
-    int _DUR;
+    public int _ATK;
+    public int _DEF;
+    public int _HP;
+    public int _MP;
+    public int _DUR;
 }

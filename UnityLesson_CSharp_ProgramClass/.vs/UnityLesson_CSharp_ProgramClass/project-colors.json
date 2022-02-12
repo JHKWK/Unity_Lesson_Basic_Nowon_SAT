@@ -105,7 +105,17 @@
       "ProjectGuid": "654b89c1-36ca-41c0-9c46-d018f85bc633",
       "DisplayName": "복습",
       "ColorIndex": 3
+    },
+    "75807246-82b1-4d9f-b4dd-6460de3482a9": {
+      "ProjectGuid": "75807246-82b1-4d9f-b4dd-6460de3482a9",
+      "DisplayName": "UnityLesson_CSharp_EnumAndSwitchCase",
+      "ColorIndex": 4
+    },
+    "b403aeb2-f1e5-4fda-9e61-74f23ff189f3": {
+      "ProjectGuid": "b403aeb2-f1e5-4fda-9e61-74f23ff189f3",
+      "DisplayName": "UnityLesson_CSharp_Structure",
+      "ColorIndex": 5
     }
   },
-  "NextColorIndex": 4
+  "NextColorIndex": 6
 }
