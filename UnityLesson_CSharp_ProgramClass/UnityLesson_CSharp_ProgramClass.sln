@@ -35,9 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityLesson_CSharp_Collecti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "복습", "복습\복습.csproj", "{654B89C1-36CA-41C0-9C46-D018F85BC633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityLesson_CSharp_EnumAndSwitchCase", "UnityLesson_CSharp_EnumAndSwitchCase\UnityLesson_CSharp_EnumAndSwitchCase.csproj", "{75807246-82B1-4D9F-B4DD-6460DE3482A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityLesson_CSharp_EnumAndSwitchCase", "UnityLesson_CSharp_EnumAndSwitchCase\UnityLesson_CSharp_EnumAndSwitchCase.csproj", "{75807246-82B1-4D9F-B4DD-6460DE3482A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityLesson_CSharp_Structure", "UnityLesson_CSharp_Structure\UnityLesson_CSharp_Structure.csproj", "{B403AEB2-F1E5-4FDA-9E61-74F23FF189F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityLesson_CSharp_Structure", "UnityLesson_CSharp_Structure\UnityLesson_CSharp_Structure.csproj", "{B403AEB2-F1E5-4FDA-9E61-74F23FF189F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityLesson_CSharp__ClassInharitance", "UnityLesson_CSharp__ClassInharitance\UnityLesson_CSharp__ClassInharitance.csproj", "{63BAAB69-076A-40EF-9A13-301CFD90F9C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityLesson_CSharp_Delegate", "UnityLesson_CSharp_Delegate\UnityLesson_CSharp_Delegate.csproj", "{F29916E1-858F-4686-8D5A-F98620247FFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -265,6 +269,30 @@ Global
 		{B403AEB2-F1E5-4FDA-9E61-74F23FF189F3}.Release|x64.Build.0 = Release|Any CPU
 		{B403AEB2-F1E5-4FDA-9E61-74F23FF189F3}.Release|x86.ActiveCfg = Release|Any CPU
 		{B403AEB2-F1E5-4FDA-9E61-74F23FF189F3}.Release|x86.Build.0 = Release|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Debug|x64.Build.0 = Debug|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Debug|x86.Build.0 = Debug|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Release|x64.ActiveCfg = Release|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Release|x64.Build.0 = Release|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Release|x86.ActiveCfg = Release|Any CPU
+		{63BAAB69-076A-40EF-9A13-301CFD90F9C6}.Release|x86.Build.0 = Release|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Debug|x64.Build.0 = Debug|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Debug|x86.Build.0 = Debug|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Release|x64.ActiveCfg = Release|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Release|x64.Build.0 = Release|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Release|x86.ActiveCfg = Release|Any CPU
+		{F29916E1-858F-4686-8D5A-F98620247FFC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

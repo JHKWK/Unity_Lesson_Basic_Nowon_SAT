@@ -37,7 +37,7 @@ namespace UnityLesson_CSharp_EnumAndSwitchCase
     {
         //Casting 캐스팅
         // 비트정보 그대로 들고와서 타입만 변경시킴
-        // (e_PlayerState)1 의 형태를 취함
+        // '(e_PlayerState)1' 의 형태를 취함
         static e_PlayerState createMotion = e_PlayerState.Test;  
         static void Main(string[] args)
         {

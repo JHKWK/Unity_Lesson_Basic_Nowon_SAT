@@ -88,11 +88,8 @@ namespace UnityLesson_CSharp_Structure
             for (int i = 0; i < length2; i++)
             {
                 arr_equipment[i] = new Equipment();
-                arr_equipment[i].equipmentAblilty._ATK = 10;
-                arr_equipment[i].equipmentAblilty._DEF = 10;
-                arr_equipment[i].equipmentAblilty._HP = 10;
-                arr_equipment[i].equipmentAblilty._MP = 10;
-                arr_equipment[i].equipmentAblilty._DUR = 10;               
+                arr_equipment[i].SetEquipmentAblilty(10, 20, 30, 40, 50);
+                arr_equipment[i].SetStats(10, 10, 10, 10, 10, 10);
 
             }
 
