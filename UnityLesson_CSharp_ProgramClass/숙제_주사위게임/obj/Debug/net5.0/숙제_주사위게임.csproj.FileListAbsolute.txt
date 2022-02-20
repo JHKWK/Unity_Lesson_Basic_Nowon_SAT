@@ -1,0 +1,16 @@
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.csproj.AssemblyReference.cache
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.AssemblyInfoInputs.cache
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.AssemblyInfo.cs
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.csproj.CoreCompileInputs.cache
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\bin\Debug\net5.0\숙제_주사위게임.exe
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\bin\Debug\net5.0\숙제_주사위게임.deps.json
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\bin\Debug\net5.0\숙제_주사위게임.runtimeconfig.json
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\bin\Debug\net5.0\숙제_주사위게임.runtimeconfig.dev.json
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\bin\Debug\net5.0\숙제_주사위게임.dll
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\bin\Debug\net5.0\숙제_주사위게임.pdb
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.dll
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\refint\숙제_주사위게임.dll
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.pdb
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\숙제_주사위게임.genruntimeconfig.cache
+C:\Users\JH\Documents\GitHub\Unity_Lesson_Basic_Nowon_SAT\UnityLesson_CSharp_ProgramClass\숙제_주사위게임\obj\Debug\net5.0\ref\숙제_주사위게임.dll

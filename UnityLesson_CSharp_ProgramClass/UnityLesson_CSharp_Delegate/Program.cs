@@ -5,9 +5,11 @@ namespace UnityLesson_CSharp_Delegate
     internal class Program
     {
         // 오버로드형으로 변환이 되는지?
-        delegate void aa(int a, int b);
+        delegate void aa(int a,int b);
+
 
         delegate int CalcDelegate(int a, int b);
+
         static bool doSum = true;
         static bool doSub = false;
         static bool doDiv = false;
@@ -32,11 +34,11 @@ namespace UnityLesson_CSharp_Delegate
             }
             if (doSub)
             {
-                PrintCalcResult(a, b, CD_Sub);
+                PrintCalcResult(a,b,CD_Sub);
             }
             if (doDiv)
             {
-                PrintCalcResult(a, b, CD_Div);
+                PrintCalcResult(a,b,CD_Div);
             }
         }
         static int Sum(int a, int b)

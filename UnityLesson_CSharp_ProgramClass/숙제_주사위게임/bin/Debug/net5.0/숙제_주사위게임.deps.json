@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "숙제_주사위게임/1.0.0": {
+        "runtime": {
+          "숙제_주사위게임.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "숙제_주사위게임/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
