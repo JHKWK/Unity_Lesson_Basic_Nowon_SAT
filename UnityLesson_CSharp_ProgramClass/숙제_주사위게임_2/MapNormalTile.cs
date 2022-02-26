@@ -10,6 +10,7 @@ namespace 숙제_주사위게임_2
     {
         public int index;
         public string name;
+        public string icon;
         public string discription;
 
         virtual public int ReturnStars()
