@@ -11,7 +11,7 @@ namespace 숙제_주사위게임_2
         public int returnStars;
         public override int ReturnStars()
         {
-            return returnStars; 
+            return returnStars;
         }
     }
 }

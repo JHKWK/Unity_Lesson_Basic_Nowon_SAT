@@ -40,15 +40,13 @@ namespace 숙제_주사위게임_2
             Console.WriteLine($"Star 타일을 통과할 때 얻을 수 있는 Star는{getStarValue}개 입니다");
             Console.WriteLine("");
         }
-
-        public void MapSetup(int maxTileNum,string random,int getStarValue)
+        public void MapSetup(int maxTileNum,string random, int getStarValue)
         {
             mapsize = maxTileNum;
             for (int i = 1; i < maxTileNum + 1; i++)
             {
                 Random randomSegment = new Random();
-                int i2 = randomSegment.Next(0,3);                
-
+                int i2 = randomSegment.Next(0,3);       
                 if (i2 == 0)
                 {
                     MapStarTile tileInfo_Star = new MapStarTile();
@@ -74,8 +72,6 @@ namespace 숙제_주사위게임_2
             Console.WriteLine($"Star 타일을 통과할 때 얻을 수 있는 Star는{getStarValue}개 입니다");
             Console.WriteLine("");
         }
-
-
         public void ShowMap(int playerPosition)
         {
             for (int i = 1; i <= mapsize; i++)

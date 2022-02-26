@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj": {}
+    "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj": {
+    "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj",
         "projectName": "UnityLesson_CSharp_StaticExample",
-        "projectPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj",
-        "packagesPath": "C:\\Users\\JH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\obj\\",
+        "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\UnityLesson_CSharp_StaticExample.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_StaticExample\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\JH\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +54,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

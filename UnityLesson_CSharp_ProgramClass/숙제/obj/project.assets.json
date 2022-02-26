@@ -8,24 +8,19 @@
     "net5.0": []
   },
   "packageFolders": {
-    "C:\\Users\\JH\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\숙제\\숙제_경마게임.csproj",
+      "projectUniqueName": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\숙제\\숙제_경마게임.csproj",
       "projectName": "숙제_경마게임",
-      "projectPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\숙제\\숙제_경마게임.csproj",
-      "packagesPath": "C:\\Users\\JH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\JH\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\숙제\\obj\\",
+      "projectPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\숙제\\숙제_경마게임.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\User\\Documents\\GitHub\\Unity_Lesson_Basic_Nowon_SAT\\UnityLesson_CSharp_ProgramClass\\숙제\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\JH\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -65,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

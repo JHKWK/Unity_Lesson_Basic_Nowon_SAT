@@ -125,7 +125,37 @@
       "ProjectGuid": "63baab69-076a-40ef-9a13-301cfd90f9c6",
       "DisplayName": "UnityLesson_CSharp__ClassInharitance",
       "ColorIndex": 7
+    },
+    "66ce8b0c-1609-4540-b8a4-5abb0ed8a24b": {
+      "ProjectGuid": "66ce8b0c-1609-4540-b8a4-5abb0ed8a24b",
+      "DisplayName": "복습2",
+      "ColorIndex": 8
+    },
+    "542e143d-dc67-436b-ad8c-525d495581a6": {
+      "ProjectGuid": "542e143d-dc67-436b-ad8c-525d495581a6",
+      "DisplayName": "숙제_주사위게임_2",
+      "ColorIndex": 9
+    },
+    "da3daec3-936a-4cf1-801b-2dfd6eff054d": {
+      "ProjectGuid": "da3daec3-936a-4cf1-801b-2dfd6eff054d",
+      "DisplayName": "숙제_주사위게임",
+      "ColorIndex": 10
+    },
+    "ede3c7ab-9e9e-4e65-bbdb-4f9dc05217b1": {
+      "ProjectGuid": "ede3c7ab-9e9e-4e65-bbdb-4f9dc05217b1",
+      "DisplayName": "숙제_경마게임",
+      "ColorIndex": 11
+    },
+    "5cb5efa6-27ba-4c56-83ea-0da4ec9301fe": {
+      "ProjectGuid": "5cb5efa6-27ba-4c56-83ea-0da4ec9301fe",
+      "DisplayName": "HorseRacing",
+      "ColorIndex": 12
+    },
+    "e8d36866-08a4-4c97-a081-f42c6812c8e3": {
+      "ProjectGuid": "e8d36866-08a4-4c97-a081-f42c6812c8e3",
+      "DisplayName": "DiceGame",
+      "ColorIndex": 13
     }
   },
-  "NextColorIndex": 8
+  "NextColorIndex": 14
 }

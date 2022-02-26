@@ -17,11 +17,9 @@ namespace 숙제_주사위게임_2
         {
             return 0;
         }
-
         public void TileInfo()
         {
             Console.WriteLine($"타일 번호 : {index}, 플레이어는 {name}타일에 있습니다. {discription}");            
         }
-        
     }
 }
