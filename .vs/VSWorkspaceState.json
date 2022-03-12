@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\UnityLesson_CSharp_ProgramClass"
+    "\\UnityLesson_CSharp_ProgramClass",
+    "\\UnityLesson_CSharp_ProgramClass\\DiceGame"
   ],
-  "SelectedNode": "\\UnityLesson_CSharp_ProgramClass\\UnityLesson_CSharp_ProgramClass.sln",
+  "SelectedNode": "\\UnityLesson_CSharp_ProgramClass\\DiceGame\\TileMap.cs",
   "PreviewInSolutionExplorer": false
 }
