@@ -9,6 +9,7 @@ public class GamePlay : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     public List<Transform> finishedPlayers = new List<Transform>();
     public List<Transform> platforms = new List<Transform>();
+    public List<GameObject> coins = new List<GameObject>();
 
     public Transform goal;
     public bool onPlay = false;
@@ -61,7 +62,8 @@ public class GamePlay : MonoBehaviour
             {
                 playermove.doMove = false;
                 finishedPlayers.Add(players[i].transform);
-                players.Remove(players[i]);                
+                players.Remove(players[i]);
+                coins[i].transform.localScale = new Vector3(0, 0, 0);
             }
 
         }
