@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
+    public Transform mainView;
+    public Transform endingView;
     private Transform tr;
-    private List<Transform> players = new List<Transform>();
+    private List<Transform> viewPoints = new List<Transform>();
     private int targetIndex = 0;
 
-    private Vector3 offset = new Vector3(0, 2, -4);
+    public Vector3 positionOffset = new Vector3(0, 1, -1.5f);
+    public Vector3 angleOffset = new Vector3(15, 0, 0);
+    
 
     private void Awake()
     {
-        tr = transform;        
+        tr = transform;
+        
     }
 
     void Start()
     {
+        viewPoints.Add(mainView);
+
         foreach (var item in GamePlay.instance.players)
         {
-            players.Add(item.transform);            
+            viewPoints.Add(item.transform);            
         }
     }
 
@@ -29,10 +36,15 @@ void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                SwtichTarget();              
+                SwtichTarget();
             }
         }
-        
+
+        else if (GamePlay.instance.raceEnd)
+        {
+            tr.position = endingView.position;
+            tr.eulerAngles = endingView.eulerAngles;
+        }
     }
 
     private void FixedUpdate()
@@ -43,7 +55,7 @@ void Update()
     private void SwtichTarget()
     {
         targetIndex++;
-        if (targetIndex > players.Count - 1)
+        if (targetIndex > viewPoints.Count - 1)
         {
             targetIndex = 0;
         }
@@ -51,7 +63,15 @@ void Update()
 
     private void FollowTarget()
     {
-        tr.position = players[targetIndex].position + offset;
-
+        if (targetIndex == 0)
+        {
+            tr.position = viewPoints[targetIndex].position;
+            tr.eulerAngles = viewPoints[targetIndex].eulerAngles;
+        }
+        else
+        {
+            tr.position = viewPoints[targetIndex].position + positionOffset;
+            tr.eulerAngles = viewPoints[targetIndex].eulerAngles + angleOffset;
+        }
     }
 }

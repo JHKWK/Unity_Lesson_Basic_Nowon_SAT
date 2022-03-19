@@ -12,6 +12,7 @@ public class GamePlay : MonoBehaviour
 
     public Transform goal;
     public bool onPlay = false;
+    public bool raceEnd = false;
     private float playersStartZPos;
     private int totalPlayers;
 
@@ -71,6 +72,7 @@ public class GamePlay : MonoBehaviour
         if (finishedPlayers.Count >= totalPlayers)
         {
             onPlay = false;
+            raceEnd = true;
             for (int i = 0; i < platforms.Count; i++)
             {
                 finishedPlayers[i].position = platforms[i].position;
