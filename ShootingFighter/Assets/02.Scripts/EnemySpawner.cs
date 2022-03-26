@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     public Quaternion target;
 
     public Transform SpwanSpot;
-    public float SpwanTimeGap = 0.5f;
+    public float SpwanTimeGap = 1f;
     private float SpwanTimer;
     private void Update()
     {
