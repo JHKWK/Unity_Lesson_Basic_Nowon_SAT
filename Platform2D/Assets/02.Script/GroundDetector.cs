@@ -6,6 +6,8 @@ public class GroundDetector : MonoBehaviour
 {
     public LayerMask groundLayer;
     public bool isDetected;
+    public float heightOffset;
+    public Collider2D groundDetector;
 
     private Rigidbody2D rb;
     private CapsuleCollider2D col;
@@ -16,25 +18,25 @@ public class GroundDetector : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CapsuleCollider2D>();
-        size.x = col.size.x * 0.5f;
+        size.x = col.size.x * 0.25f;
         size.y = 0.005f;
     }
     private void Update()
     {
         center.x = rb.position.x + col.offset.x;
-        center.y = rb.position.y + col.offset.y - col.size.y*0.5f - size.y;
-        isDetected = Physics2D.OverlapBox(center, size, 0, groundLayer);
-        
+        center.y = rb.position.y + col.offset.y - col.size.y*0.5f - size.y -heightOffset;
+        groundDetector = Physics2D.OverlapBox(center, size, 0, groundLayer);
+        isDetected = groundDetector;
     }
     private void OnDrawGizmos()
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<CapsuleCollider2D>();
-        size.x = col.size.x * 0.5f;
+        size.x = col.size.x * 0.25f;
         size.y = 0.005f;
 
         center.x = rb.position.x + col.offset.x;
-        center.y = rb.position.y + col.offset.y - col.size.y * 0.5f - size.y;
+        center.y = rb.position.y + col.offset.y - col.size.y * 0.5f - size.y - heightOffset;
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(new Vector3(center.x,center.y,0),new Vector3(size.x,size.y,0));
