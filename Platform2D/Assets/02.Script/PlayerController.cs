@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public enum PlayerState
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
         DashAttack,
         Slide
     }
-    public enum IdleState
+    public enum MotionState
     {
         Idle,
         Prepare,
@@ -25,92 +26,18 @@ public class PlayerController : MonoBehaviour
         OnAction,
         Finish
     }
-    public enum RunState
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum CrouchState
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum JumpState
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum JumpAttackState
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum FallState
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum AttackState
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum DashState
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum DashAttack
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-    public enum Slide
-    {
-        Idle,
-        Prepare,
-        Casting,
-        OnAction,
-        Finish
-    }
-
-
    
     public PlayerState state;
-    public IdleState idleState;
-    public RunState runState;
-    public CrouchState crouchState;
-    public JumpState jumpState;
-    public JumpAttackState jumpAttackState;
-    public FallState fallState;
-    public DashState dashState;
-    public AttackState attackState;
-    public DashAttack dashAttackState;
-    public Slide slideState;
+    public MotionState idleState;
+    public MotionState runState;
+    public MotionState crouchState;
+    public MotionState jumpState;
+    public MotionState jumpAttackState;
+    public MotionState fallState;
+    public MotionState dashState;
+    public MotionState attackState;
+    public MotionState dashAttackState;
+    public MotionState slideState;
 
     public Vector2 moveVector;
 
@@ -126,12 +53,20 @@ public class PlayerController : MonoBehaviour
                 _direction = -1;
                 transform.eulerAngles = new Vector3(0, 180f, 0);
             }
-
-            else if (value > 0) transform.eulerAngles = Vector3.zero;
+            else if (value > 0)
+            {
+                _direction = 1;
+                transform.eulerAngles = Vector3.zero;
+            }
         }
 
         get { return _direction; }
     }
+
+    public LayerMask enemyLayer;
+
+    public Vector2 attackBoxCastCenter;
+    public Vector2 attackBoxCastSize;        
 
     private Rigidbody2D rb;
     private int _direction; // +1 :right , -1 = left
@@ -141,7 +76,11 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private GroundDetector groundDetector;
 
-    private float jumpTime = 0.1f;
+
+    public float attackKnockbackForce;
+    public float attackKnockbackTime;
+
+    private float jumpCastingTime = 0.1f;
     private float jumpTimer;
     private float dashTime = 0.7f;
     private float dashTimer;
@@ -154,12 +93,18 @@ public class PlayerController : MonoBehaviour
     private float slideTime = 0.5f;
     private float slideTimer;
     private float h;
+    bool isEnemyHit;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         groundDetector = GetComponent<GroundDetector>();
+
+        attackTime = GetAnimationTime("Attack") * 0.5f;
+        dashAttackTime = GetAnimationTime("DashAttack") * 0.5f;
+        jumpAttackTime = GetAnimationTime("JumpAttack");
+        slideTime = GetAnimationTime("Slide");
     }
     private void Update()
     {
@@ -170,7 +115,7 @@ public class PlayerController : MonoBehaviour
            state != PlayerState.DashAttack )
         {
             if (h < 0) direction = -1;
-            else if (h > 0) direction = 1;
+            if (h > 0) direction = 1;
         } //방향전환
 
         if (Mathf.Abs(h) > moveInputOffset)
@@ -185,10 +130,11 @@ public class PlayerController : MonoBehaviour
         if (state != PlayerState.Jump &&
             state != PlayerState.Attack &&
             state != PlayerState.JumpAttack &&
+             state != PlayerState.DashAttack &&
             state != PlayerState.Dash &&
             !groundDetector.isDetected )
             ChangePlayerState(PlayerState.Fall);
-        if (state == PlayerState.Dash && !groundDetector.isDetected) StartCoroutine(DashToFall());
+        if (state == PlayerState.Dash && state == PlayerState.DashAttack && !groundDetector.isDetected) StartCoroutine(DashToFall());
         // 추락
 
         if (Input.GetButtonDown("Jump"))
@@ -255,7 +201,16 @@ public class PlayerController : MonoBehaviour
             rb.position += moveVector;
         }
     }
-
+    float GetAnimationTime(string name)
+    {
+        float time = 0f;
+        RuntimeAnimatorController ac = animator.runtimeAnimatorController;
+        for (int i = 0; i < ac.animationClips.Length; i++)
+        {
+            if (ac.animationClips[i].name == name) time = ac.animationClips[i].length;
+        }
+        return time;
+    }
     IEnumerator DashToFall()
     {
         yield return new WaitForSeconds(0.3f);
@@ -269,77 +224,78 @@ public class PlayerController : MonoBehaviour
         switch (state) // 이전상태 하위머신 초기화
         {
             case PlayerState.Idle:
-                idleState = IdleState.Idle;
+                idleState = MotionState.Idle;
                 break;
             case PlayerState.Run:
-                runState = RunState.Idle;
+                runState = MotionState.Idle;
                 break;
             case PlayerState.Crouch:
-                crouchState = CrouchState.Idle;
+                crouchState = MotionState.Idle;
                 break;
             case PlayerState.Jump:
-                jumpState = JumpState.Idle;
+                jumpState = MotionState.Idle;
                 break;
             case PlayerState.JumpAttack:
-                jumpAttackState = JumpAttackState.Idle;
+                jumpAttackState = MotionState.Idle;
                 break;
             case PlayerState.Fall:
-                fallState = FallState.Idle;
+                fallState = MotionState.Idle;
                 break;
             case PlayerState.Dash:
-                dashState = DashState.Idle;
+                dashState = MotionState.Idle;
                 break;
             case PlayerState.Attack:
-                attackState = AttackState.Idle;
+                attackState = MotionState.Idle;
                 break;
             case PlayerState.DashAttack:
-                dashAttackState = DashAttack.Idle;
+                dashAttackState = MotionState.Idle;
                 break;
             case PlayerState.Slide:
-                slideState = Slide.Idle;
+                slideState = MotionState.Idle;
                 break;
             default:
                 break;
         }
 
-        state = newState; // 현재상태 바꿈
+        state = newState; // 현재상태 업데이트
         
         switch (state) // 현재상태 하위머신 준비
         {
             case PlayerState.Idle:
-                idleState = IdleState.Prepare;
+                idleState = MotionState.Prepare;
                 break;                
             case PlayerState.Run:
-                runState = RunState.Prepare;
+                runState = MotionState.Prepare;
                 break;
             case PlayerState.Crouch:
-                crouchState = CrouchState.Prepare;
+                crouchState = MotionState.Prepare;
                 break;
             case PlayerState.Jump:
-                jumpState = JumpState.Prepare;
+                jumpState = MotionState.Prepare;
                 break;
             case PlayerState.JumpAttack:
-                jumpAttackState= JumpAttackState.Prepare;
+                jumpAttackState= MotionState.Prepare;
                 break;
             case PlayerState.Fall:
-                fallState = FallState.Prepare;
+                fallState = MotionState.Prepare;
                 break;
             case PlayerState.Dash:
-                dashState= DashState.Prepare;
+                dashState= MotionState.Prepare;
                 break;
             case PlayerState.Attack:
-                attackState = AttackState.Prepare;
+                attackState = MotionState.Prepare;
                 break;
             case PlayerState.DashAttack:
-                dashAttackState= DashAttack.Prepare;
+                dashAttackState= MotionState.Prepare;
                 break;
             case PlayerState.Slide:
-                slideState = Slide.Prepare;
+                slideState = MotionState.Prepare;
                 break;
             default:
                 break;
         }
     }
+
 
     private void UpdatePlayerState()
     {
@@ -383,18 +339,18 @@ public class PlayerController : MonoBehaviour
     {
         switch (idleState)
         {
-            case IdleState.Idle:
+            case MotionState.Idle:
                 idleState++;
                 break;
-            case IdleState.Prepare:
+            case MotionState.Prepare:
                 animator.Play("Idle");
                 idleState++;
                 break;
-            case IdleState.Casting:
+            case MotionState.Casting:
                 break;
-            case IdleState.OnAction:
+            case MotionState.OnAction:
                 break;
-            case IdleState.Finish:
+            case MotionState.Finish:
                 break;
             default:
                 break;
@@ -404,75 +360,51 @@ public class PlayerController : MonoBehaviour
     {
         switch (jumpState)
         {
-            case JumpState.Idle:
+            case MotionState.Idle:
                 break;
-            case JumpState.Prepare:
+            case MotionState.Prepare:
                 animator.Play("Jump");
                 rb.velocity = new Vector2(rb.velocity.x, 0); //속도 초기화
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                jumpTimer = jumpTime;
+                jumpTimer = jumpCastingTime;
                 jumpState++;
                 break;
-            case JumpState.Casting:
+            case MotionState.Casting:
                 if (!groundDetector.isDetected ) jumpState++;
                 else if(jumpTimer < 0) ChangePlayerState(PlayerState.Idle);
                 jumpTimer -= Time.deltaTime;
                 break;
-            case JumpState.OnAction:
+            case MotionState.OnAction:
                 if (Input.GetButtonDown("Attack")) ChangePlayerState(PlayerState.JumpAttack);
                 if (rb.velocity.y <= 0)jumpState++;                
                 break;
-            case JumpState.Finish:
+            case MotionState.Finish:
                 ChangePlayerState(PlayerState.Fall);
                 break;
             default:
                 break;
         }
     }
-    private void UpdateJumpAttack()
-    {
-        switch (jumpAttackState)
-        {
-            case JumpAttackState.Idle:
-                break;
-            case JumpAttackState.Prepare:
-                animator.Play("JumpAttack");
-                jumpAttackTimer = jumpAttackTime;
-                jumpAttackState++;
-                break;
-            case JumpAttackState.Casting:
-                if(jumpAttackTimer<0)jumpAttackState++;
-                jumpAttackTimer -= Time.deltaTime;
-                break;
-            case JumpAttackState.OnAction:
-                jumpAttackState++;
-                break;
-            case JumpAttackState.Finish:
-                ChangePlayerState(PlayerState.Idle);
-                break;
-            default:
-                break;
-        }
-    }
+
     private void UpdateFallState()
     {
         switch (fallState)
         {
-            case FallState.Idle:
+            case MotionState.Idle:
                 break;
-            case FallState.Prepare:
+            case MotionState.Prepare:
                 rb.velocity = new Vector2(rb.velocity.x * 0.3f, rb.velocity.y); //속도 초기화
                 animator.Play("Fall");
                 fallState++;
                 break;
-            case FallState.Casting:
+            case MotionState.Casting:
                 if (Input.GetButtonDown("Attack")) ChangePlayerState(PlayerState.JumpAttack);
                 if (groundDetector.isDetected ) fallState++;
                 break;
-            case FallState.OnAction:
+            case MotionState.OnAction:
                 fallState++;
                 break;
-            case FallState.Finish:
+            case MotionState.Finish:
                 ChangePlayerState(PlayerState.Idle);
                 break;
             default:
@@ -483,19 +415,19 @@ public class PlayerController : MonoBehaviour
     {
         switch (runState)
         {
-            case RunState.Idle:
+            case MotionState.Idle:
                 break;
-            case RunState.Prepare:
+            case MotionState.Prepare:
                 animator.Play("Run");
                 runState++;
                 break;
-            case RunState.Casting:
+            case MotionState.Casting:
                 runState++;
                 break;
-            case RunState.OnAction:
+            case MotionState.OnAction:
                 if(move.x == 0) runState++;
                 break;
-            case RunState.Finish:
+            case MotionState.Finish:
                 ChangePlayerState(PlayerState.Idle); ;
                 break;
             default:
@@ -506,19 +438,19 @@ public class PlayerController : MonoBehaviour
     {
         switch (crouchState)
         {
-            case CrouchState.Idle:
+            case MotionState.Idle:
                 break;
-            case CrouchState.Prepare:
+            case MotionState.Prepare:
                 animator.Play("Crouch");
                 crouchState++;
                 break;
-            case CrouchState.Casting:
+            case MotionState.Casting:
                 crouchState++;
                 break;
-            case CrouchState.OnAction:
+            case MotionState.OnAction:
                 if(Input.GetButtonUp("Crouch")) crouchState++;
                 break;
-            case CrouchState.Finish:
+            case MotionState.Finish:
                 ChangePlayerState(PlayerState.Idle);
                 break;
             default:
@@ -530,9 +462,9 @@ public class PlayerController : MonoBehaviour
 
         switch (dashState)
         {
-            case DashState.Idle:
+            case MotionState.Idle:
                 break;
-            case DashState.Prepare:
+            case MotionState.Prepare:
                 animator.Play("Dash");
                 rb.velocity = new Vector2(0,rb.velocity.y);
                 rb.AddForce(transform.right * dashForce, ForceMode2D.Impulse);
@@ -540,66 +472,16 @@ public class PlayerController : MonoBehaviour
                 dashTimer = dashTime;
                 dashState++;
                 break;
-            case DashState.Casting:
+            case MotionState.Casting:
                 if (Input.GetButtonDown("Attack")) ChangePlayerState(PlayerState.DashAttack);
                 if (Input.GetButton("Crouch")) ChangePlayerState(PlayerState.Slide);
                 if (dashTimer <= 0) dashState++;
                 dashTimer -= Time.deltaTime;
                 break;
-            case DashState.OnAction:
+            case MotionState.OnAction:
                 dashState++;
                 break;
-            case DashState.Finish:
-                ChangePlayerState(PlayerState.Idle);
-                break;
-            default:
-                break;
-        }
-    }
-    private void UpdateAttackState()
-    {
-        switch (attackState)
-        {
-            case AttackState.Idle:
-                break;
-            case AttackState.Prepare:
-                attackTimer = attackTime;
-                animator.Play("Attack");
-                attackState++;
-                break;
-            case AttackState.Casting:
-                attackState++;
-                break;
-            case AttackState.OnAction:
-                if(attackTimer<0) attackState++;
-                attackTimer -= Time.deltaTime;
-                break;
-            case AttackState.Finish:
-                ChangePlayerState(PlayerState.Idle);
-                break;
-            default:
-                break;
-        }
-    }
-    private void UpdateDashAttackState()
-    {
-        switch (dashAttackState)
-        {
-            case DashAttack.Idle:
-                break;
-            case DashAttack.Prepare:
-                dashAttackTimer = dashAttackTime;
-                animator.Play("DashAttack");
-                dashAttackState++;
-                break;
-            case DashAttack.Casting:
-                if(dashAttackTimer<0) dashAttackState++;
-                dashAttackTimer -= Time.deltaTime;
-                break;
-            case DashAttack.OnAction:
-                dashAttackState++;
-                break;
-            case DashAttack.Finish:
+            case MotionState.Finish:
                 ChangePlayerState(PlayerState.Idle);
                 break;
             default:
@@ -610,27 +492,158 @@ public class PlayerController : MonoBehaviour
     {
         switch (slideState)
         {
-            case Slide.Idle:
+            case MotionState.Idle:
                 break;
-            case Slide.Prepare:
+            case MotionState.Prepare:
                 animator.Play("Slide");
-                rb.AddForce(transform.right*((dashForce - Mathf.Abs(rb.velocity.x))*0.7f), ForceMode2D.Impulse);
+                rb.AddForce(transform.right * ((dashForce - Mathf.Abs(rb.velocity.x)) * 0.7f), ForceMode2D.Impulse);
                 slideTimer = slideTime;
                 slideState++;
                 break;
-            case Slide.Casting:
+            case MotionState.Casting:
                 if (Input.GetButtonDown("Attack")) ChangePlayerState(PlayerState.DashAttack);
-                if (slideTimer<0) slideState++;
+                if (slideTimer < 0) slideState++;
                 slideTimer -= Time.deltaTime;
                 break;
-            case Slide.OnAction:
+            case MotionState.OnAction:
                 slideState++;
                 break;
-            case Slide.Finish:
+            case MotionState.Finish:
                 ChangePlayerState(PlayerState.Idle);
                 break;
             default:
                 break;
         }
+    }
+    private void UpdateAttackState()
+    {
+        switch (attackState)
+        {
+            case MotionState.Idle:
+                break;
+            case MotionState.Prepare:
+                attackTimer = attackTime;
+                animator.Play("Attack");
+                attackState++;
+                break;
+            case MotionState.Casting:
+                
+                if(attackTimer < attackTime/2)
+                {
+                    if (!isEnemyHit)
+                    { 
+                        Vector2 tmpCenter = new Vector2(attackBoxCastCenter.x * direction, attackBoxCastCenter.y) + rb.position;
+                        RaycastHit2D[] hits = Physics2D.BoxCastAll(tmpCenter, attackBoxCastSize, 0, Vector2.zero, 0, enemyLayer);
+                        foreach (var hit in hits)
+                        {
+                            if (hit.collider != null) hit.collider.GetComponent<EnemyController>().Knockback(new Vector2(direction, 0), attackKnockbackForce , attackKnockbackTime);
+                            Debug.Log("Hit");
+                        }
+                        isEnemyHit = true;
+                        attackState++;
+                    }                    
+                }
+                else attackTimer -= Time.deltaTime;
+                break;
+            case MotionState.OnAction:
+                isEnemyHit = false;
+                if (attackTimer<0) attackState++;
+                else attackTimer -= Time.deltaTime;
+                break;
+            case MotionState.Finish:
+                ChangePlayerState(PlayerState.Idle);
+                break;
+            default:
+                break;
+        }
+    }
+    private void UpdateDashAttackState()
+    {
+        switch (dashAttackState)
+        {
+            case MotionState.Idle:
+                break;
+            case MotionState.Prepare:
+                dashAttackTimer = dashAttackTime;
+                animator.Play("DashAttack");
+                dashAttackState++;
+                break;
+            case MotionState.Casting:
+                dashAttackTimer -= Time.deltaTime;
+
+                if (!isEnemyHit)
+                {
+                    Vector2 tmpCenter = new Vector2(attackBoxCastCenter.x * direction, attackBoxCastCenter.y) + rb.position;
+                    Vector2 dashAttackBoxCastSize = new Vector2(attackBoxCastSize.x * 1.5f, attackBoxCastSize.y);
+                    RaycastHit2D[] hits = Physics2D.BoxCastAll(tmpCenter, dashAttackBoxCastSize, 0, Vector2.zero, 1, enemyLayer);
+                    foreach (var hit in hits)
+                    {
+                        if (hit.collider != null) hit.collider.GetComponent<EnemyController>().Knockback(new Vector2(direction, 0), attackKnockbackForce*1.5f, attackKnockbackTime);
+                        Debug.Log("Hit");
+                    }
+                    isEnemyHit = true;
+                }
+                else if (dashAttackTimer<0) dashAttackState++;
+                break;
+            case MotionState.OnAction:
+                isEnemyHit = false;
+                dashAttackState++;
+                break;
+            case MotionState.Finish:
+                ChangePlayerState(PlayerState.Idle);
+                break;
+            default:
+                break;
+        }
+    }
+    private void UpdateJumpAttack()
+    {
+        switch (jumpAttackState)
+        {
+            case MotionState.Idle:
+                break;
+            case MotionState.Prepare:
+                animator.Play("JumpAttack");
+                jumpAttackTimer = jumpAttackTime;
+                jumpAttackState++;
+                break;
+            case MotionState.Casting:
+
+                jumpAttackTimer -= Time.deltaTime;
+
+                Vector2 tmpCenter = new Vector2(attackBoxCastCenter.x * direction, attackBoxCastCenter.y) + rb.position;
+                Vector2 dashAttackBoxCastSize = new Vector2(attackBoxCastSize.x * 1.5f, attackBoxCastSize.y);
+                RaycastHit2D[] hits = Physics2D.BoxCastAll(tmpCenter, dashAttackBoxCastSize, 0, Vector2.zero, 1, enemyLayer);
+
+                if (!isEnemyHit)
+                {
+                    foreach (var hit in hits)
+                    {
+                        if (hit.collider != null) hit.collider.GetComponent<EnemyController>().Knockback(new Vector2(direction, 0), attackKnockbackForce * 1.5f, attackKnockbackTime);
+                        Debug.Log("Hit");
+                    }
+                    isEnemyHit = true;
+                }
+
+                else if (jumpAttackTimer < 0) jumpAttackState++;
+
+                break;
+            case MotionState.OnAction:
+                isEnemyHit = false;
+                jumpAttackState++;
+                break;
+            case MotionState.Finish:
+                ChangePlayerState(PlayerState.Idle);
+                break;
+            default:
+                break;
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        Gizmos.color = Color.red;
+        Vector2 tmpCenter = new Vector2(attackBoxCastCenter.x * direction, attackBoxCastCenter.y) + rb.position;
+        Gizmos.DrawWireCube(tmpCenter, attackBoxCastSize);
     }
 }

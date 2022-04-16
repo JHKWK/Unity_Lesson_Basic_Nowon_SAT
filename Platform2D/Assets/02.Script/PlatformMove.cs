@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlatformMove : MonoBehaviour
 {
     public enum MoveType
@@ -11,6 +12,7 @@ public class PlatformMove : MonoBehaviour
         UpDiagonal,
         DownDiagonal,
     }
+
     public MoveType movingType;
     public float startPosition;
     public float moveSpeed;
@@ -18,7 +20,12 @@ public class PlatformMove : MonoBehaviour
     public float stayTime;
 
     private float stayTimer;
-    private enum State {Awake,MoveForward,MoveBack};
+    private enum State 
+    {
+        Awake,
+        MoveForward,
+        MoveBack
+    }
     private GameObject moveArea;
     private GameObject renderObject;
     private Transform platform;
