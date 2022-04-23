@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
         Dash,
         Attack,
         DashAttack,
-        Slide
+        Slide,
+        Hurt,
+        Die,
     }
     public enum MotionState
     {
@@ -38,12 +40,15 @@ public class PlayerController : MonoBehaviour
     public MotionState attackState;
     public MotionState dashAttackState;
     public MotionState slideState;
+    public MotionState hurtState;
+    public MotionState dieState;
 
     public Vector2 moveVector;
 
     public float moveSpeed = 2;
     public float jumpForce = 0.1f;
     public float dashForce = 3;
+    public float damage;
     public int direction
     {
         set
@@ -88,10 +93,14 @@ public class PlayerController : MonoBehaviour
     private float attackTimer;
     private float dashAttackTime = 0.5f;
     private float dashAttackTimer;
-    private float jumpAttackTime = 0.3f;
+    private float jumpAttackTime = 1f;
     private float jumpAttackTimer;
     private float slideTime = 0.5f;
     private float slideTimer;
+    private float hurtTime;
+    private float hurtTimer;
+    private float dieTime;
+    private float dieTimer;
     private float h;
     bool isEnemyHit;
 
@@ -105,6 +114,8 @@ public class PlayerController : MonoBehaviour
         dashAttackTime = GetAnimationTime("DashAttack") * 0.5f;
         jumpAttackTime = GetAnimationTime("JumpAttack");
         slideTime = GetAnimationTime("Slide");
+        hurtTime = GetAnimationTime("Hurt");
+        dieTime = GetAnimationTime("Die");
     }
     private void Update()
     {
@@ -201,6 +212,8 @@ public class PlayerController : MonoBehaviour
             rb.position += moveVector;
         }
     }
+
+
     float GetAnimationTime(string name)
     {
         float time = 0f;
@@ -253,6 +266,12 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Slide:
                 slideState = MotionState.Idle;
                 break;
+            case PlayerState.Hurt:
+                hurtState = MotionState.Idle;
+                break;
+            case PlayerState.Die:
+                dieState = MotionState.Idle;
+                break;
             default:
                 break;
         }
@@ -291,6 +310,12 @@ public class PlayerController : MonoBehaviour
             case PlayerState.Slide:
                 slideState = MotionState.Prepare;
                 break;
+            case PlayerState.Hurt:
+                hurtState = MotionState.Prepare;
+                break;
+            case PlayerState.Die:
+                dieState = MotionState.Prepare;
+                break;
             default:
                 break;
         }
@@ -314,7 +339,7 @@ public class PlayerController : MonoBehaviour
                 UpdateJumpState();
                 break;
             case PlayerState.JumpAttack:
-                UpdateJumpAttack();
+                UpdateJumpAttackState();
                 break;
             case PlayerState.Fall:
                 UpdateFallState();
@@ -330,6 +355,12 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.Slide:
                 UpdateSlideState();
+                break;
+            case PlayerState.Hurt:
+                UpdateHurtState();
+                break;
+            case PlayerState.Die:
+                UpdateDieState();
                 break;
             default:
                 break;
@@ -538,6 +569,8 @@ public class PlayerController : MonoBehaviour
                         {
                             if (hit.collider != null) hit.collider.GetComponent<EnemyController>().Knockback(new Vector2(direction, 0), attackKnockbackForce , attackKnockbackTime);
                             Debug.Log("Hit");
+
+                            hit.collider.GetComponent<Enemy>().hp -= damage;
                         }
                         isEnemyHit = true;
                         attackState++;
@@ -574,12 +607,13 @@ public class PlayerController : MonoBehaviour
                 if (!isEnemyHit)
                 {
                     Vector2 tmpCenter = new Vector2(attackBoxCastCenter.x * direction, attackBoxCastCenter.y) + rb.position;
-                    Vector2 dashAttackBoxCastSize = new Vector2(attackBoxCastSize.x * 1.5f, attackBoxCastSize.y);
-                    RaycastHit2D[] hits = Physics2D.BoxCastAll(tmpCenter, dashAttackBoxCastSize, 0, Vector2.zero, 1, enemyLayer);
+                    Vector2 dashAttackBoxCastSize = new Vector2(attackBoxCastSize.x , attackBoxCastSize.y*2);
+                    RaycastHit2D[] hits = Physics2D.BoxCastAll(tmpCenter, dashAttackBoxCastSize, 0, Vector2.zero, 0, enemyLayer);
                     foreach (var hit in hits)
                     {
                         if (hit.collider != null) hit.collider.GetComponent<EnemyController>().Knockback(new Vector2(direction, 0), attackKnockbackForce*1.5f, attackKnockbackTime);
-                        Debug.Log("Hit");
+                        Debug.Log("DashHit");
+                        hit.collider.GetComponent<Enemy>().hp -= damage;
                     }
                     isEnemyHit = true;
                 }
@@ -596,7 +630,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-    private void UpdateJumpAttack()
+    private void UpdateJumpAttackState()
     {
         switch (jumpAttackState)
         {
@@ -608,19 +642,18 @@ public class PlayerController : MonoBehaviour
                 jumpAttackState++;
                 break;
             case MotionState.Casting:
-
+                
                 jumpAttackTimer -= Time.deltaTime;
-
-                Vector2 tmpCenter = new Vector2(attackBoxCastCenter.x * direction, attackBoxCastCenter.y) + rb.position;
-                Vector2 dashAttackBoxCastSize = new Vector2(attackBoxCastSize.x * 1.5f, attackBoxCastSize.y);
-                RaycastHit2D[] hits = Physics2D.BoxCastAll(tmpCenter, dashAttackBoxCastSize, 0, Vector2.zero, 1, enemyLayer);
-
                 if (!isEnemyHit)
                 {
+                    
+                    Vector2 tmpCenter = new Vector2(attackBoxCastCenter.x * direction, attackBoxCastCenter.y) + rb.position;
+                    Vector2 jumpAttackBoxCastSize = new Vector2(attackBoxCastSize.x * 1.5f, attackBoxCastSize.y);
+                    RaycastHit2D[] hits = Physics2D.BoxCastAll(tmpCenter, jumpAttackBoxCastSize, 0, Vector2.zero, 1, enemyLayer);
                     foreach (var hit in hits)
                     {
                         if (hit.collider != null) hit.collider.GetComponent<EnemyController>().Knockback(new Vector2(direction, 0), attackKnockbackForce * 1.5f, attackKnockbackTime);
-                        Debug.Log("Hit");
+                        Debug.Log("JumpHit");
                     }
                     isEnemyHit = true;
                 }
@@ -639,6 +672,99 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
+    private void UpdateHurtState()
+    {
+        switch (hurtState)
+        {
+            case MotionState.Idle:
+                break;
+            case MotionState.Prepare:
+                animator.Play("Hurt");
+                hurtTimer = hurtTime;
+
+                hurtState++;
+                break;
+            case MotionState.Casting:
+                hurtTimer -= Time.deltaTime;
+                hurtState++;
+                break;
+            case MotionState.OnAction:
+                if (hurtTimer < 0) hurtState++;
+                else hurtTimer -= Time.deltaTime;
+                break;
+            case MotionState.Finish:
+                ChangePlayerState(PlayerState.Idle);
+                break;
+            default:
+                break;
+        }
+    }
+    private void UpdateDieState()
+    {
+        switch (dieState)
+        {
+            case MotionState.Idle:
+                break;
+            case MotionState.Prepare:
+                animator.Play("Die");
+                moveSpeed = 0;
+                rb.velocity = Vector2.zero;
+                dieTimer = dieTime;
+                dieState++;
+                break;
+            case MotionState.Casting:
+                dieTime -= Time.deltaTime;
+                dieState++;
+                break;
+            case MotionState.OnAction:
+                dieTime -= Time.deltaTime;
+                if (dieTime < 0) dieState++;
+                break;
+            case MotionState.Finish:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public bool invisiable;
+    public Coroutine invisibleCoroutine;
+    public void Knockback(Vector2 dir, float force, float time)
+    {
+        if(!invisiable &&
+            state == PlayerState.Idle||
+            state == PlayerState.Run||
+            state == PlayerState.Jump||
+            state == PlayerState.Fall)
+        {
+            invisiable = true;
+            Invoke("InvisiableOff", 1);
+            StartCoroutine(E_InvisiableOff());
+            rb.velocity = Vector2.zero;
+            StartCoroutine(E_Knockback(dir, force, time));
+        }
+    }
+    void InvisiableOff()
+    {
+        invisiable = false;
+    }
+    IEnumerator E_InvisiableOff()
+    {
+        yield return new WaitForSeconds(1f);
+        invisiable = false;
+    }
+    IEnumerator E_Knockback(Vector2 dir, float force, float time)
+    {
+        float timer = time;
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            rb.AddForce(dir * force, ForceMode2D.Force);
+            rb.AddForce(Vector2.up * force * 1.5f, ForceMode2D.Force);
+            yield return null;
+        }
+    }
+
     private void OnDrawGizmos()
     {
         rb = GetComponent<Rigidbody2D>();

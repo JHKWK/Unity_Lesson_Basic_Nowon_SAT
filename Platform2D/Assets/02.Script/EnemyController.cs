@@ -13,13 +13,23 @@ public class EnemyController : MonoBehaviour
         Hurt,
         Die
     }
-    public enum MotionState 
+    public enum MotionState
     {
         Idle,
         Prepare,
         Casting,
         OnAction,
         Finish
+    }
+    public enum AiState
+    {
+        Idle,
+        DecideRandomBehavior,
+        TakeARest,
+        MoveLeft,
+        MoveRight,
+        FollowTarget,
+        AttackTarget,
     }
 
     [Header("상태")]
@@ -29,7 +39,41 @@ public class EnemyController : MonoBehaviour
     public MotionState attackState;
     public MotionState hurtState;
     public MotionState dieState;
-    
+
+    [Header("인공지능")]
+    public AiState aiState;
+    public bool aiAutoFollow;
+    public float aiDetectRange;
+    public bool aiAttackEnable;
+    public float aiBehaviorTimeMin;
+    public float aiBehaviorTimeMax;
+    public float aiBehaviorTimer;
+    public LayerMask aiTargetLayer;
+
+    [Header("동작")]
+    public Vector2 move;
+    public Vector2 moveVector;
+    public float moveSpeed = 2;
+    int _direction;
+    public int direction
+    {
+        set
+        {
+            if (value < 0)
+            {
+                _direction = -1;
+                transform.eulerAngles = Vector3.zero;
+            }
+            else if (value > 0)
+            {
+                _direction = 1;
+                transform.eulerAngles = new Vector3(0, 180f, 0);
+            }
+        }
+
+        get { return _direction; }
+    }
+
     [Header("애니메이션")]
     public Animator animator;
     float animationTimer;
@@ -39,20 +83,23 @@ public class EnemyController : MonoBehaviour
 
     [Header("키네메틱스")]
     Rigidbody2D rb;
-    Vector2 move;
+    BoxCollider2D col;
     GroundDetector groundDetector;
 
-    public void Knockback(Vector2 dir,float force, float time)
+    public float damage = 10;
+    public float attackKnockbackTime = 1;
+
+    public void Knockback(Vector2 dir, float force, float time)
     {
         rb.velocity = Vector2.zero;
         StartCoroutine(E_Knockback(dir, force, time));
     }
-    IEnumerator E_Knockback(Vector2 dir,float force, float time)
+    IEnumerator E_Knockback(Vector2 dir, float force, float time)
     {
         float timer = time;
         while (timer > 0)
         {
-            timer-=Time.deltaTime;
+            timer -= Time.deltaTime;
             rb.AddForce(dir * force, ForceMode2D.Force);
             rb.AddForce(Vector2.up * force * 1.5f, ForceMode2D.Force);
             yield return null;
@@ -64,6 +111,7 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
         groundDetector = GetComponent<GroundDetector>();
+        col = GetComponent<BoxCollider2D>();
 
         attackTime = GetAnimationTime("Attack");
         hurtTime = GetAnimationTime("Hurt");
@@ -73,7 +121,37 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         UpdateEnemyState();
+        UpdateAiState();
+
+        if (move.x < 0) direction = -1;
+        if (move.x > 0) direction = 1;
+
+        if (Mathf.Abs(move.x) > 0)
+        {
+            if (state == EnemyState.Idle)
+                ChangeEnemyState(EnemyState.Move);
+        }
+        else move.x = 0;
+
+        
+
     }
+
+    private void FixedUpdate()
+    {
+        moveVector = new Vector2(move.x * moveSpeed, 0) * Time.fixedDeltaTime;
+        rb.position += moveVector;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(rb.position, aiDetectRange);
+
+    }
+
 
     public void UpdateEnemyState()
     {
@@ -98,7 +176,7 @@ public class EnemyController : MonoBehaviour
                 break;
         }
     }
-    void ChangeEnemyState(EnemyState newState)
+    public void ChangeEnemyState(EnemyState newState)
     {
         if (state == newState) return;
 
@@ -131,16 +209,16 @@ public class EnemyController : MonoBehaviour
                 idleState = MotionState.Prepare;
                 break;
             case EnemyState.Move:
-                moveState= MotionState.Prepare;
+                moveState = MotionState.Prepare;
                 break;
             case EnemyState.Attack:
-                attackState= MotionState.Prepare;
+                attackState = MotionState.Prepare;
                 break;
             case EnemyState.Hurt:
-                hurtState= MotionState.Prepare;
+                hurtState = MotionState.Prepare;
                 break;
             case EnemyState.Die:
-                dieState= MotionState.Prepare;
+                dieState = MotionState.Prepare;
                 break;
             default:
                 break;
@@ -188,6 +266,7 @@ public class EnemyController : MonoBehaviour
                 break;
             case MotionState.Prepare:
                 animator.Play("Attack");
+                attackState++;
                 break;
             case MotionState.Casting:
                 break;
@@ -231,12 +310,13 @@ public class EnemyController : MonoBehaviour
                 break;
             case MotionState.Prepare:
                 animator.Play("Hurt");
-                animationTimer = hurtTime;                
-                idleState++;
+                animationTimer = hurtTime;
+                
+                hurtState++;
                 break;
             case MotionState.Casting:
                 animationTimer -= Time.deltaTime;
-                idleState++;
+                hurtState++;
                 break;
             case MotionState.OnAction:
                 if (animationTimer < 0) hurtState++;
@@ -257,20 +337,80 @@ public class EnemyController : MonoBehaviour
             case MotionState.Idle:
                 break;
             case MotionState.Prepare:
-                animator.Play("Die");
+                animator.Play("Die");                
+                moveSpeed = 0;
+                rb.velocity = Vector2.zero;
+                col.enabled = false;
                 animationTimer = dieTime;
                 dieState++;
                 break;
             case MotionState.Casting:
                 dieTime -= Time.deltaTime;
-                idleState++;
+                dieState++;
                 break;
             case MotionState.OnAction:
                 dieTime -= Time.deltaTime;
-                if(dieTime<0) idleState++;
+                if (dieTime < 0) dieState++;
                 break;
             case MotionState.Finish:
-                ChangeEnemyState(EnemyState.Idle);
+                Destroy(this.gameObject);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void UpdateAiState()
+    {
+        if (aiAutoFollow)
+        {
+            if( Physics2D.OverlapCircle(rb.position, aiDetectRange, aiTargetLayer))
+            {
+                aiState = AiState.FollowTarget;
+            } 
+        }
+
+        switch (aiState)
+        {
+            case AiState.Idle:
+                aiState++;
+                break;
+            case AiState.DecideRandomBehavior:
+                move.x = 0;
+                aiBehaviorTimer =Random.Range(aiBehaviorTimeMin, aiBehaviorTimeMax);
+                aiState = (AiState)Random.Range(2,5);
+                break;
+            case AiState.TakeARest:
+                animator.Play("");
+                if (aiBehaviorTimer < 0) aiState = AiState.DecideRandomBehavior;
+                else aiBehaviorTimer -= Time.deltaTime;
+                break;
+            case AiState.MoveLeft:
+                if (aiBehaviorTimer < 0) aiState = AiState.DecideRandomBehavior;
+                else
+                {
+                    move.x = -1;
+                    aiBehaviorTimer -= Time.deltaTime;
+                }
+                break;
+            case AiState.MoveRight:
+                if (aiBehaviorTimer < 0) aiState = AiState.DecideRandomBehavior;
+                else
+                {
+                    move.x = 1;
+                    aiBehaviorTimer -= Time.deltaTime;
+                }
+                break;
+            case AiState.FollowTarget:
+                Collider2D target = Physics2D.OverlapCircle(rb.position, aiDetectRange, aiTargetLayer);
+                if (target == null)
+                    aiState = AiState.DecideRandomBehavior;
+
+                else if (target.transform.position.x > rb.position.x + col.size.x) move.x = 1;
+                else if (target.transform.position.x < rb.position.x) move.x = -1;
+
+                break;
+            case AiState.AttackTarget:
                 break;
             default:
                 break;

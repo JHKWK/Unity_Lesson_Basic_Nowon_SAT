@@ -15,6 +15,8 @@ public class OnPlatform : MonoBehaviour
     private void Update()
     {
         if (GetComponent<PlayerController>().state == PlayerController.PlayerState.Fall) platform = null;
+
+
     }
     private void FixedUpdate()
     {
