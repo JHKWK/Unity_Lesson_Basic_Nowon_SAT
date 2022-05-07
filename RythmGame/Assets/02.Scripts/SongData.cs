@@ -5,6 +5,8 @@
 public class SongData
 {
     public string videoName; // 뮤직비디오 이름
+    public int bpm;
+    public int segment;
     public List<NoteData> notes; // 노트들
     public SongData()
     {
