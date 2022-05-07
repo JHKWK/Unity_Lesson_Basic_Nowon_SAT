@@ -98,6 +98,8 @@ public class ChartMaker : MonoBehaviour
     public GameObject redLine;
 
     Transform tr;
+    Transform notesGroup;
+    Transform gridsGroup;
     GameObject track;
     List<GameObject> grids;
     public List<GameObject> notes;
@@ -113,14 +115,30 @@ public class ChartMaker : MonoBehaviour
         bpm = 60;
         gridSegment = 2;
 
+        notesGroup = transform.Find("NotesGroup");
+        gridsGroup = transform.Find("GridsGroup");
         grids = new List<GameObject>();
         notes = new List<GameObject>();
 
         slider.maxValue = (float)vp.length;
+    }
+
+    private void Start()
+    {
+        //LoadSongData();
+        //StartCoroutine(SetUI());
+        StartCoroutine(E_SetUp());
+    }
+
+    IEnumerator E_SetUp()
+    {
+        yield return new WaitUntil(() => vp.clip != null);
+        yield return new WaitUntil(() => songData != null);
 
         LoadSongData();
-        StartCoroutine(SetUI());        
+        InputBPM.instance.GetComponent<InputField>().text = bpm.ToString(); //  set UI
     }
+
     private void FixedUpdate()
     {
         ChartScroll();
@@ -132,6 +150,9 @@ public class ChartMaker : MonoBehaviour
             GridSnap();
         if(recordOn)
             RecordNote();
+
+        if (notes.Count != notesGroup.childCount)
+            ResetNotesList();
     }
     public void LoadSongData()
     {
@@ -191,7 +212,7 @@ public class ChartMaker : MonoBehaviour
     public void ResetNotesList()
     {
         notes = new List<GameObject>();
-        Transform notesGroup = transform.Find("NotesGroup");
+        
         int tmp = notesGroup.childCount;
         for (int i = 0; i < tmp; i++)
         {
@@ -219,7 +240,7 @@ public class ChartMaker : MonoBehaviour
         }
         foreach (GameObject item in grids)
         {
-            item.transform.SetParent(transform.Find("GridsGroup"), false);
+            item.transform.SetParent(gridsGroup, false);
             item.transform.localScale = new Vector3(7, gridThickness / _noteSpeed, 1);
         }
     }
@@ -401,10 +422,5 @@ public class ChartMaker : MonoBehaviour
     {
         if (vp.isPlaying) slider.value = (float)vp.time;
     }
-    IEnumerator SetUI()
-    {
-        yield return new WaitForSeconds(0.1f);
-        //inputBPM.GetComponent<InputField>().text = bpm.ToString();
-        InputBPM.instance.GetComponent<InputField>().text = bpm.ToString();
-    }
+
 }
