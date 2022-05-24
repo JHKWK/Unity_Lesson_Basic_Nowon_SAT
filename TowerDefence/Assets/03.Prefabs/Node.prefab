@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3241787220526803397}
   - component: {fileID: 4758196659539634720}
   - component: {fileID: 1897672166827935942}
+  - component: {fileID: 2277692303939326161}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -95,3 +96,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2277692303939326161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8418766326059760524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dece6fcd08dc82346b0485c6d56ac994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerOffsetY: 0.5
+  render: {fileID: 4758196659539634720}
+  buildAvailableColor: {r: 0.6058562, g: 0.9528302, b: 0.73544884, a: 0.50980395}
+  buildNotAvailableColor: {r: 0.9716981, g: 0.40701312, b: 0.40701312, a: 0.50980395}

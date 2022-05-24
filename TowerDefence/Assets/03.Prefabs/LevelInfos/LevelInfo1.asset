@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 685b143f4dd28614481762920c57dd2c, type: 3}
+  m_Name: LevelInfo1
+  m_EditorClassIdentifier: 
+  level: 1
+  stageInfos:
+  - stage: 0
+    enemiesElements:
+    - prefab: {fileID: 7321687849461459556, guid: 3b83b410037d1d24fa016b1ccd4d1359, type: 3}
+      num: 1
+      delay: 1
+  - stage: 1
+    enemiesElements:
+    - prefab: {fileID: 7321687849461459556, guid: 3b83b410037d1d24fa016b1ccd4d1359, type: 3}
+      num: 2
+      delay: 1
+    - prefab: {fileID: 5943517575641651618, guid: c6e66d4c0fb98e84baa49c08544590de, type: 3}
+      num: 3
+      delay: 2
+  - stage: 2
+    enemiesElements:
+    - prefab: {fileID: 7321687849461459556, guid: 3b83b410037d1d24fa016b1ccd4d1359, type: 3}
+      num: 3
+      delay: 1
+    - prefab: {fileID: 5943517575641651618, guid: c6e66d4c0fb98e84baa49c08544590de, type: 3}
+      num: 3
+      delay: 2
+    - prefab: {fileID: 5943517575641651618, guid: 10703ca6faa3dca4786a266d0e165567, type: 3}
+      num: 1
+      delay: 5

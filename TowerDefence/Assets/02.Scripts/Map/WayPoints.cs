@@ -13,6 +13,11 @@ public class WayPoints : MonoBehaviour
         return points[0];
     }
 
+    public Transform GetLastWayPoint()
+    {
+        return points[points.Length-1];
+    }
+
     /// <summary>
     /// 다음 포인트를 가져오는 함수
     /// </summary>
