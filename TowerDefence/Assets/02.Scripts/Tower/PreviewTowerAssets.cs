@@ -11,7 +11,7 @@ public class PreviewTowerAssets : MonoBehaviour
         {
             if(_instance == null)
             {
-                _instance = Instantiate(Resources.Load<PreviewTowerAssets>("Assets/PreviewTowerAssets"));                
+                _instance = Instantiate(Resources.Load<PreviewTowerAssets>("Assets/PreviewTowerAssets"));
             }
             return _instance;
         }

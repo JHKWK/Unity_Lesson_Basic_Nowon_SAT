@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3384322251960000348}
   - component: {fileID: 7619544777903709066}
   - component: {fileID: 8033873908299399949}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,6 +351,26 @@ PrefabInstance:
     - target: {fileID: 4545324842343211385, guid: fa86ef532ae7e854a979a92a2d839065, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545324842343211385, guid: fa86ef532ae7e854a979a92a2d839065, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5307521115625102009, guid: fa86ef532ae7e854a979a92a2d839065, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6908188164421676224, guid: fa86ef532ae7e854a979a92a2d839065, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505981834683958727, guid: fa86ef532ae7e854a979a92a2d839065, type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7775213111019780925, guid: fa86ef532ae7e854a979a92a2d839065, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa86ef532ae7e854a979a92a2d839065, type: 3}

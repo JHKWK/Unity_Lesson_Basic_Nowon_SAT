@@ -6,7 +6,24 @@ public class Tower_MachineGun : Tower
 {
     public float damage;
     public float reloadTime;
+    public Transform bullet;
+    public float bulletSpeed;
     float reloadTimer;
+    Transform firePoint;
+
+
+    private void Awake()
+    {
+        Transform[] children = this.GetComponentsInChildren<Transform>();
+
+        foreach (Transform tr in children)
+        {
+            if ("FirePoint" == tr.name)
+            {
+                firePoint = tr;
+            }
+        }
+    }
 
     protected override void Update()
     {
@@ -31,7 +48,13 @@ public class Tower_MachineGun : Tower
     void Attack()
     {
         //target의 체력을 damage만큼 만큼 깎음
-        target.GetComponentInParent<Enemy>().hp -= damage;
+        //target.GetComponentInParent<Enemy>().hp -= damage;
+        Fire();
     }
 
+    void Fire()
+    {
+        Transform tmpBullet = Instantiate(bullet,firePoint.position,firePoint.rotation);
+        tmpBullet.parent = gameObject.transform;
+    }
 }
