@@ -31,7 +31,7 @@ public class Tower_RocketLauncher : Tower
             {
                 GameObject rocket = Instantiate(rocketPrefab, firePoint.position, Quaternion.identity);
                 Vector3 dir = (target.transform.position - rocket.transform.position).normalized;
-                rocket.GetComponent<Rocket>().Setup(dir, damage);
+                rocket.GetComponent<Rocket>().Setup(dir, damage, target);
             }
         }
     }

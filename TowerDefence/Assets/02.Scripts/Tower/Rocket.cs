@@ -25,11 +25,14 @@ public class Rocket : MonoBehaviour
         //Destroy(gameObject);
     }
 
-    public void Setup(Vector3 dir, float damage)
+    public void Setup(Vector3 dir, float damage, Transform target)
     {
-        tr.LookAt(dir);
-        _moveVec = tr.forward * speed;
+        Transform renderer = tr.Find( "Renderer" );
+
+        renderer.LookAt(target);
+        _moveVec = dir * speed;
         _damage = damage;
+
     }
 
     private void Awake()
