@@ -19,8 +19,9 @@ public class PreviewTowerAssets : MonoBehaviour
 
     public List<GameObject> previewTowers = new List<GameObject>();
 
-    public static GameObject GetPreviewTower (TowerType towerType)
+    public static GameObject GetPreviewTower (TowerType towerType, int towerLevel)
     {
-        return instance.previewTowers.Find(x => x.GetComponent<PreviewTower>().TowerType == towerType);
+        return instance.previewTowers.Find(x => x.GetComponent<PreviewTower>().TowerType == towerType &&
+                                                x.GetComponent<PreviewTower>().towerLevel == towerLevel);
     }
 }

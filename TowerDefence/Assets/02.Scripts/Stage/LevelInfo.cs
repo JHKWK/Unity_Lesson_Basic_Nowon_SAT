@@ -6,6 +6,7 @@ using UnityEngine;
 public class LevelInfo : ScriptableObject
 {
     public int level;
+    public int initMoney;
     public List<StageInfo> stageInfos = new List<StageInfo>();
 }
 

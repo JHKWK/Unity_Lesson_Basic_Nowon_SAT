@@ -43,10 +43,20 @@ public class Bullet : MonoBehaviour
         tr.position =new Vector3( 0,0,-5000);
         Color originalcolor;
         originalcolor = tmpTr.GetComponent<Renderer>().material.color;
-        tmpTr.GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(0.2f);
+        Renderer[] reders = tmpTr.GetComponentsInChildren<Renderer>();
+        foreach (Renderer render in reders)
+        {
+            render.material.color = Color.red;
+        }
+
+
+        yield return new WaitForSeconds(0.15f);
         if (tmpTr != null)
-            tmpTr.GetComponent<Renderer>().material.color = originalcolor;
+            foreach (Renderer render in reders)
+            {
+                render.material.color = originalcolor;
+            }
+
         Destroy(gameObject);
         yield return null;
     }

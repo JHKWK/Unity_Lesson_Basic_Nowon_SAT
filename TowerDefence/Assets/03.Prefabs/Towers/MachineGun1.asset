@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   upgradeLevel: 0
-  buildPrice: 0
-  sellPrice: 0
+  buildPrice: 80
+  sellPrice: 40
+  icon: {fileID: 21300000, guid: dc4cb333489236f418d81c73f9173188, type: 3}

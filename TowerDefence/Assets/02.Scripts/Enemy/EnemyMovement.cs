@@ -40,6 +40,7 @@ public class EnemyMovement : MonoBehaviour
                 {
                     currentPointIndex++;
                     tr.LookAt(nextWayPoint);
+                    
                 }
             }
             else

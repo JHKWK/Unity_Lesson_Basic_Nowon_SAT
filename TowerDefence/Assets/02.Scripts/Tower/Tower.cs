@@ -29,7 +29,6 @@ public class Tower : MonoBehaviour
             target = null;
         }
     }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

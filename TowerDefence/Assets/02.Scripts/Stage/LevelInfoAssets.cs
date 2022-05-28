@@ -51,4 +51,9 @@ public class LevelInfoAssets : MonoBehaviour
         return null;
     }
 
+    public static LevelInfo GetLevelInfo(int level)
+    {
+        return instance.levelInfos.Find(x => x.level == level);
+    }
+
 }

@@ -4,4 +4,5 @@ using UnityEngine;
 public class PreviewTower : MonoBehaviour
 {
     public TowerType TowerType;
+    public int towerLevel;
 }

@@ -9,7 +9,7 @@ public class TowerHandler : MonoBehaviour
     public GameObject previewTower;
 
 
-    TowerInfo selectedTowerInfo;
+    public TowerInfo selectedTowerInfo;
     public bool isSeleted
     {
         get { return selectedTowerInfo != null ? true : false; }
@@ -21,7 +21,7 @@ public class TowerHandler : MonoBehaviour
         selectedTowerInfo = towerInfo;
         gameObject.SetActive(true);
         if(previewTower != null) Destroy(previewTower);
-        previewTower = Instantiate(PreviewTowerAssets.GetPreviewTower(selectedTowerInfo.type), transform);
+        previewTower = Instantiate(PreviewTowerAssets.GetPreviewTower(selectedTowerInfo.type,selectedTowerInfo.upgradeLevel), transform);
     }
 
     public void Clear()
