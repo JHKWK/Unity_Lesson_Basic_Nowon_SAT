@@ -8,19 +8,20 @@ public class Tower_MachineGun : Tower
     public float reloadTime;
     public Transform bullet;
     public float bulletSpeed;
-    float reloadTimer;
-    Transform firePoint;
+    float tmpTimer;
+    List<Transform> firePoints;
+    bool _rest;
 
 
     private void Awake()
     {
-        Transform[] children = this.GetComponentsInChildren<Transform>();
-
-        foreach (Transform tr in children)
+        firePoints = new List<Transform>();
+        Transform[] tmpTrs = GetComponentsInChildren<Transform>();
+        foreach (Transform tr in tmpTrs)
         {
             if ("FirePoint" == tr.name)
             {
-                firePoint = tr;
+                firePoints.Add(tr);
             }
         }
     }
@@ -28,33 +29,29 @@ public class Tower_MachineGun : Tower
     protected override void Update()
     {
         base.Update();
-
-        //재장전
-        if(reloadTimer < 0)
-        {
-            if (target != null)
-            {
-                Attack();
-                reloadTimer = reloadTime;
-            }
-        }
-
-        else
-        {
-            reloadTimer -= Time.deltaTime;
-        }
-    }
-
-    void Attack()
-    {
-        //target의 체력을 damage만큼 만큼 깎음
-        //target.GetComponentInParent<Enemy>().hp -= damage;
-        Fire();
+        if (target != null) Fire();
     }
 
     void Fire()
     {
-        Transform tmpBullet = Instantiate(bullet,firePoint.position,firePoint.rotation);
-        tmpBullet.parent = gameObject.transform;
+        
+        float tmpTime = reloadTime / firePoints.Count;
+        tmpTimer -= Time.deltaTime;
+        foreach (Transform tr in firePoints)
+        {
+            if (tmpTimer < 0)
+            {
+                Transform tmpBullet = Instantiate(bullet, tr.position, tr.rotation);
+                tmpBullet.parent = gameObject.transform;
+                
+                firePoints.RemoveAt(0);
+                firePoints.Add(tr);
+
+                tmpTimer = tmpTime;
+
+                return;
+            }
+        }
     }
+
 }

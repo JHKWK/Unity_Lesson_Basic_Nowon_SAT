@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public Transform fireEffect;
     Transform tr;
-    Transform target;
+    Transform target;    
     float speed;
     float damage;
     private void Awake()
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
             {
                 if (GetComponentInParent<Tower_MachineGun>() != null) damage = GetComponentInParent<Tower_MachineGun>().damage;
                 col.gameObject.GetComponentInParent<Enemy>().hp -= damage;
-                StartCoroutine(ChangeColor(col.gameObject));
+                if(col.gameObject!=null) StartCoroutine(ChangeColor(col.gameObject));
             }
         } 
         else Destroy(gameObject);
@@ -41,8 +41,7 @@ public class Bullet : MonoBehaviour
     IEnumerator ChangeColor(GameObject tmpTr)
     {
         tr.position =new Vector3( 0,0,-5000);
-        Color originalcolor;
-        originalcolor = tmpTr.GetComponent<Renderer>().material.color;
+
         Renderer[] reders = tmpTr.GetComponentsInChildren<Renderer>();
         foreach (Renderer render in reders)
         {
@@ -54,7 +53,7 @@ public class Bullet : MonoBehaviour
         if (tmpTr != null)
             foreach (Renderer render in reders)
             {
-                render.material.color = originalcolor;
+                render.material.color = Color.white;
             }
 
         Destroy(gameObject);

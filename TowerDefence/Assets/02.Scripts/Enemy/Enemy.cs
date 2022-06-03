@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] Slider hpBar;
+    [SerializeField] GameObject explodingPrefab;
+    public Slider hpBar;
     public float hpMax;
+    Vector3 offset = new Vector3(0, 0.5f, 0);
 
     float _hp;
     public float hp
@@ -22,6 +24,8 @@ public class Enemy : MonoBehaviour
 
             if (_hp < 0)
             {
+                LevelManager.instance.killedEnemy++;
+                Instantiate(explodingPrefab, transform.position + offset, Quaternion.Euler(-90,0,0));
                 Destroy(gameObject);
             }
 
@@ -35,5 +39,4 @@ public class Enemy : MonoBehaviour
     {
         hp = hpMax;
     }
-
 }

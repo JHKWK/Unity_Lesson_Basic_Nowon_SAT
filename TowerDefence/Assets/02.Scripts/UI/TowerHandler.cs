@@ -44,7 +44,6 @@ public class TowerHandler : MonoBehaviour
         instance = this;
         gameObject.SetActive(false);
     }
-
     private void Update()
     {
 

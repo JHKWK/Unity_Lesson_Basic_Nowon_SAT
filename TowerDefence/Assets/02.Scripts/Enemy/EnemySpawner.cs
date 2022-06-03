@@ -19,6 +19,13 @@ public class EnemySpawner : MonoBehaviour
     float[][] timers;
     int[][] counts;
 
+
+
+    private void Awake()
+    {
+        Setup(0);
+    }
+
     public void Spawn()
     {
         if (currentStage < spawnElements.Length)
@@ -26,9 +33,10 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(E_Spawn());
         }
     }
-
-    private void Awake()
+    public void Setup(int level)
     {
+        currentStage = 0;
+        currentLevel = level;
         //현재 레벨에 대한 모든 스테이지 정보 가져옴
         StageInfo[] tmpStageInfos = LevelInfoAssets.GetAllStageInfos(currentLevel);
 
@@ -36,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
         spawnElements = new SpawnElement[tmpStageInfos.Length][];
 
         //소환해야 하는 스테이지별 에너미 목록 할당
-        for(int i =0; i < tmpStageInfos.Length; i++)
+        for (int i = 0; i < tmpStageInfos.Length; i++)
         {
             spawnElements[i] = tmpStageInfos[i].enemiesElements;
         }
@@ -54,8 +62,8 @@ public class EnemySpawner : MonoBehaviour
                 counts[i][j] = spawnElements[i][j].num;
             }
         }
-    }
 
+    }
     IEnumerator E_Spawn()
     {
         int tmpStage = currentStage;

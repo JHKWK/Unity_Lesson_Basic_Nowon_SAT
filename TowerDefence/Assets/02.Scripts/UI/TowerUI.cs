@@ -33,6 +33,13 @@ public class TowerUI : MonoBehaviour
         //위치 세팅
         transform.position = position + Vector3.up * _offsetY;
 
+        if (transform.position.x > 6) transform.position += Vector3.left;
+        if (transform.position.x < -11.5f) transform.position += Vector3.right;
+        if (transform.position.z > 5) transform.position += Vector3.back; 
+        if (transform.position.z < -5) transform.position += Vector3.forward;
+
+
+
         // 업그레이드 버튼 세팅
         if (TowerAssets.TryGetTowerPrefab(_node.towerInfo.type, _node.towerInfo.upgradeLevel + 1, out GameObject towerPrefab))
         {
