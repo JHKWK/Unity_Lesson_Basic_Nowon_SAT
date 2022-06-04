@@ -83,7 +83,7 @@ MonoBehaviour:
   rotatePoint: {fileID: 3376970231980519437}
   target: {fileID: 0}
   rocketPrefab: {fileID: 7405585682331601379, guid: 80af5cb19c0626f40b63887975193811, type: 3}
-  damage: 20
+  damage: 50
   reloadTime: 5
   firePoints:
   - {fileID: 3375799855383663937}

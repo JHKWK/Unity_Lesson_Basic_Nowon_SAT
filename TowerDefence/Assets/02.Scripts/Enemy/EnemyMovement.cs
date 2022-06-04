@@ -12,16 +12,9 @@ public class EnemyMovement : MonoBehaviour
     private Transform nextWayPoint;
     private float originPosY;
     private Transform ui;
-    private Transform _worldZero;
-
 
     private void Awake()
     {
-        /*
-        _worldZero = new GameObject().transform;
-
-        _worldZero = WorldZero.instance.transform;
-        */
 
         tr = transform;
         originPosY = transform.position.y;
@@ -50,12 +43,8 @@ public class EnemyMovement : MonoBehaviour
                 if(WayPoints.instance.TryGetNextPoint(currentPointIndex, out nextWayPoint))
                 {
                     currentPointIndex++;
-                    
-                    // _worldZero를 초기화 하지 않고 비워뒀을 때 참조되고 있는 대상이 무었인지?????
-                    //ui.parent = _worldZero;
-                    ui.parent = null;//왜 작동되는것인가
-                    Debug.Log(_worldZero); // Null UnityEngine.Debug:Log(object) 
 
+                    ui.parent = null;
                     tr.LookAt(nextWayPoint);
                     ui.parent = tr;
                 }

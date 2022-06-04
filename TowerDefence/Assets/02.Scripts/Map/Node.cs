@@ -58,11 +58,11 @@ public class Node : MonoBehaviour
         render.material.color = originalColor;
     }
 
-    private void OnMouseDown()
+    private void OnMouseUp()
     {
         // 건설할 타워가 선택 되어있고 현재 노드에 건설된 타워가 없다면
         if (TowerHandler.instance.isSeleted &&
-            towerBuilt == null )
+            towerBuilt == null)
         {
             TowerInfo info = TowerHandler.instance.selectedTowerInfo;
             if (TowerAssets.TryGetTowerPrefab(info.type, info.upgradeLevel, out GameObject towerPrefab))
@@ -76,11 +76,15 @@ public class Node : MonoBehaviour
                 throw new System.Exception("타워 프리팹을 가져오는데 실패함. 타워타입과 레벨확인 요망");
             }
         }
-        else if(TowerHandler.instance.isSeleted == false &&
+        else if (TowerHandler.instance.isSeleted == false &&
                 towerBuilt != null)
         {
-            TowerUI.instance.Setup(towerBuilt.transform.position,this);
+            TowerUI.instance.Setup(towerBuilt.transform.position, this);
         }
+    }
+    private void OnMouseDown()
+    {
+
     }
 
 }

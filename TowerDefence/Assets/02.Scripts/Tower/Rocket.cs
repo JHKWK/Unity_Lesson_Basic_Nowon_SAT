@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
+    public GameObject RocketExplodingEffectPrefab;
     public float speed;
     public LayerMask touchLayer;
     public LayerMask targetLayer;
@@ -22,7 +23,9 @@ public class Rocket : MonoBehaviour
             if (col.GetComponentInParent<Enemy>()!= null)
                 col.GetComponentInParent<Enemy>().hp -= _damage;
         }
-        //Destroy(gameObject);
+
+        Instantiate(RocketExplodingEffectPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     public void Setup(Vector3 dir, float damage, Transform target)
@@ -45,7 +48,7 @@ public class Rocket : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(tr.position, 1f, touchLayer);
         if (cols.Length > 0)
         {
-            Explode();
+            StartCoroutine(E_Explode());
         }
     }
 
@@ -53,4 +56,12 @@ public class Rocket : MonoBehaviour
     {
         tr.Translate( _moveVec * Time.fixedDeltaTime );
     }
+
+    IEnumerator E_Explode()
+    {
+        yield return new WaitForSeconds(0.4f);
+        Explode();
+    }
+
 }
+

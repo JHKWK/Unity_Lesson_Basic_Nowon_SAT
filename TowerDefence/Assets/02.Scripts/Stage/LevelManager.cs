@@ -17,7 +17,6 @@ public class LevelManager : MonoBehaviour
             Destroy(instance);
         instance = this;
 
-        money = 1000;
         Setup();
     }
     void Setup()
@@ -64,6 +63,11 @@ public class LevelManager : MonoBehaviour
             Debug.Log("지정한 레벨이 없습니다");
             return;
         }
+    }
+
+    public void IncreaseMoney(int value)
+    {
+        money += value;
     }
 
 }

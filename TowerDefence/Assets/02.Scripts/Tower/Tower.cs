@@ -23,11 +23,17 @@ public class Tower : MonoBehaviour
             colliders.OrderBy(x => (x.transform.position - WayPoints.instance.GetLastWayPoint().position).magnitude );
             target = colliders[0].transform;
             rotatePoint.LookAt(target);
+
         }
         else
         {
             target = null;
         }
+    }
+
+    protected virtual void FixedUpdate()
+    {
+
     }
     private void OnDrawGizmosSelected()
     {
