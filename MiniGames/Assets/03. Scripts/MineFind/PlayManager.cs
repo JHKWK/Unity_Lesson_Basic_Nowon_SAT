@@ -4,10 +4,12 @@ using UnityEngine;
 
 public enum GameStatus
 {
+    Title,
     MainMenu,
     PrepareToPlay,
     OnPlay,
-    Gameover
+    Gameover,
+    Win
 }
 public class PlayManager : MonoBehaviour
 {
@@ -43,8 +45,10 @@ public class PlayManager : MonoBehaviour
     IEnumerator FirstSetup()
     {
         yield return new WaitUntil(() => GUImain.instance != null);
+        yield return new WaitUntil(() => StageManager.instance != null);
 
         ChangeGameStatusMainMenu();
+
         yield return null;
     }
     void ChangeGameStatus(GameStatus inputGameStatus)
@@ -58,10 +62,6 @@ public class PlayManager : MonoBehaviour
             case GameStatus.MainMenu:
                 {
                     GUImain.instance.PanelSetup();
-
-                    if (StageManager.instance != null)
-                        StageManager.instance.DestroyTiles();
-
                     return;
                 }
             case GameStatus.PrepareToPlay:
@@ -87,4 +87,7 @@ public class PlayManager : MonoBehaviour
             default: return;
         }
     }
+
+
+
 }
