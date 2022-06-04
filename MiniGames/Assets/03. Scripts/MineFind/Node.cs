@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Linq;
 public enum NodeType { Num, Mine }
 public class Node : MonoBehaviour
 {
     public NodeType nodeType;
 
     [SerializeField] Collider[] hits;
+    [SerializeField] List<Node> arounds;
     [SerializeField] Text text;
     [SerializeField] Transform flag;
     [SerializeField] LayerMask layerMask;
@@ -49,6 +50,7 @@ public class Node : MonoBehaviour
 
     public void Setup()
     {
+        arounds.Clear();
         scale = StageManager.instance.scale;
         isOpened = false;
         text.gameObject.SetActive(true);
@@ -74,18 +76,26 @@ public class Node : MonoBehaviour
     void DetectAroundTiles()
     {
         gameObject.GetComponent<Collider>().enabled = false;        
-        hits = Physics.OverlapSphere(transform.position, scale * 0.9f, layerMask);
+        Collider[] cols = Physics.OverlapSphere(transform.position, scale * 0.9f, layerMask);
+
+        foreach (var sub in cols)
+        {
+            if (sub.TryGetComponent<Node>(out Node node))
+                arounds.Add(node);
+        }
+
         gameObject.GetComponent<Collider>().enabled = true;
     }
     void SetNum() 
     {
         DetectAroundTiles();
 
-        foreach (Collider hit in hits)
+
+        foreach (var sub in arounds)
         {
-            if (hit.gameObject.GetComponent<Node>().nodeType == NodeType.Mine)
+            if (sub.nodeType == NodeType.Mine)
             {
-                Debug.Log(hit.transform.position);
+                Debug.Log(sub.transform.position);
                 num++;
             }
         }
@@ -123,9 +133,9 @@ public class Node : MonoBehaviour
                     {
                         GetComponentInChildren<Renderer>().material = material_opened;
                         DetectAroundTiles();
-                        foreach (Collider hit in hits)
+                        foreach (var sub in arounds)
                         {
-                            if (!hit.gameObject.GetComponent<Node>().isOpened) hit.gameObject.GetComponent<Node>().OpenTile();
+                            if (!sub.isOpened) sub.OpenTile();
                         }
                     }
                     else
@@ -158,10 +168,10 @@ public class Node : MonoBehaviour
             if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
             {
                 DetectAroundTiles();
-                foreach (Collider hit in hits)
+                foreach (var sub in arounds)
                 {
-                    if (!hit.GetComponent<Node>().isOpened)
-                        hit.GetComponent<Node>().OpenTile();
+                    if (sub.isOpened == false)
+                        sub.OpenTile();
                 }
             }
 
