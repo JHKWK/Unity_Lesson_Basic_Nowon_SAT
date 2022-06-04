@@ -71,11 +71,10 @@ public class Node : MonoBehaviour
                 }
         }
     }
-
     void DetectAroundTiles()
     {
         gameObject.GetComponent<Collider>().enabled = false;        
-        hits = Physics.OverlapSphere(transform.position,scale,layerMask);
+        hits = Physics.OverlapSphere(transform.position, scale * 0.9f, layerMask);
         gameObject.GetComponent<Collider>().enabled = true;
     }
     void SetNum() 
@@ -90,7 +89,12 @@ public class Node : MonoBehaviour
                 num++;
             }
         }
-        if (num == 0) text.color = Color.gray;
+
+        if (num == 0)
+        {
+            text.gameObject.SetActive(false);
+            text.color = Color.gray;
+        }
         if (num == 1) text.color = color1;
         if (num == 2) text.color = color2;
         if (num == 3) text.color = color3;
@@ -128,7 +132,6 @@ public class Node : MonoBehaviour
                     {
                         GetComponentInChildren<Renderer>().material = material_opened;                        
                     }
-
                     break;
 
                 case NodeType.Mine:
@@ -140,7 +143,6 @@ public class Node : MonoBehaviour
                     break;
 
                 default: return;
-
             }
         }
     }
@@ -174,7 +176,6 @@ public class Node : MonoBehaviour
                     isFlaged = false;
                 }
             }
-
         }
     }
 
@@ -182,6 +183,6 @@ public class Node : MonoBehaviour
     {
         scale = StageManager.instance.scale;
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, scale);
+        Gizmos.DrawWireSphere(transform.position, scale * 0.9f);
     }
 }

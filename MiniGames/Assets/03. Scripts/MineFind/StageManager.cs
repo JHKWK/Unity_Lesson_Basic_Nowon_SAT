@@ -19,6 +19,8 @@ public class StageManager : MonoBehaviour
         if (instance != null)
             Destroy(instance);
         instance = this;
+
+
     }
     public void SetWH(int w)
     {
@@ -38,7 +40,6 @@ public class StageManager : MonoBehaviour
 
         for (int i = 0; i < width; i++)
         {
-
             for (int j = 0; j < height; j++)
             {
 
