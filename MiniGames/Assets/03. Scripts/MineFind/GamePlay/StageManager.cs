@@ -9,7 +9,11 @@ public class StageManager : MonoBehaviour
     public static StageManager instance;
     public bool isSetAllTilseDone;
 
+    [Header("난이도 (%)")]
+    [SerializeField] int difficulty;
+
     // Main Camera
+    [Header("오브젝트")]
     [SerializeField] Camera gamePlayCamera;
     [SerializeField] Transform background;
     // Node Prefab
@@ -74,7 +78,7 @@ public class StageManager : MonoBehaviour
 
     float originalCameraorthographicSize;
     float scale;
-    int randomSeed;
+    int setMineCount;
     int width;
     int height;
     int totalTilesCount;
@@ -161,7 +165,7 @@ public class StageManager : MonoBehaviour
 
         //지뢰 생성
         Debug.Log($"StageManager.지뢰배치 시작");
-        for (int n = 0; n < randomSeed;)
+        for (int n = 0; n < setMineCount;)
         {
             int i = Random.Range(0, width);
             int j = Random.Range(0, height);
@@ -206,9 +210,9 @@ public class StageManager : MonoBehaviour
             else scale = 1f;
         }
 
-        randomSeed = width * height / 10;
+        setMineCount = Mathf.RoundToInt(width * height * difficulty * 0.01f);
 
-        Debug.Log($" StageManager.SetWH 가로 : {width}, 세로 : {height}, 축적 : {scale}, 지뢰갯수설정 : {randomSeed}");
+        Debug.Log($" StageManager.SetWH 가로 : {width}, 세로 : {height}, 축적 : {scale}, 지뢰갯수설정 : {setMineCount}");
     }
     void ResetCamera()
     {        

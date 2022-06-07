@@ -7,19 +7,20 @@ public enum NodeType { Num, Mine }
 public class Node : MonoBehaviour
 {
     public NodeType nodeType;
-    
+    [Header("노드 구성요소")]
     [SerializeField] Text text;
     [SerializeField] Transform flag;
     [SerializeField] Transform mine;
     [SerializeField] LayerMask layerMask;
-
+    [Header("머테리얼")]
     [SerializeField] Material material_opened;
     [SerializeField] Material material_unOpen;
+    [Header("렌더러")]
     [SerializeField] Renderer _renderer;
-
+    [Header("효과")]
     [SerializeField] ParticleSystem EffectExploding;
     [SerializeField] ParticleSystem EffectPop;
-
+    [Header("number 컬러셋")]
     [SerializeField] Color color1;
     [SerializeField] Color color2;
     [SerializeField] Color color3;
