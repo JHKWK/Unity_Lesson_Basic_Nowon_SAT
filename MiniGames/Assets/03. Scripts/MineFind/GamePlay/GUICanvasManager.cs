@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GUImain : MonoBehaviour
+public class GUICanvasManager : MonoBehaviour
 {
-    public static GUImain instance;
-    public GameObject GamevoerPannel;
-    public GameObject MainMenuPannel;
-    public GameObject OnPlayPannel;
+    public static GUICanvasManager instance;
+
+    [SerializeField] GameObject GamevoerPannel;
+
+    [SerializeField] GameObject MainMenuPannel;
+
+    [SerializeField] GameObject OnPlayPannel;
+    public Text remainMinesCountText;
+    public Text openedTilesText;
+    public Button winButton;
 
     private void Awake()
     {
@@ -16,7 +22,6 @@ public class GUImain : MonoBehaviour
             Destroy(instance);
 
         instance = this;
-
     }
     public void PanelSetup()
     {
@@ -29,9 +34,6 @@ public class GUImain : MonoBehaviour
                 break;
 
             case GameStatus.PrepareToPlay:
-                MainMenuPannel.SetActive(true);
-                OnPlayPannel.SetActive(false);
-                GamevoerPannel.SetActive(false);
                 break;
 
             case GameStatus.OnPlay:
@@ -40,14 +42,20 @@ public class GUImain : MonoBehaviour
                 GamevoerPannel.SetActive(false);
                 break;
 
+            case GameStatus.PausePlay:
+                break;
+
+
             case GameStatus.Gameover:
                 MainMenuPannel.SetActive(false);
                 OnPlayPannel.SetActive(false);
                 GamevoerPannel.SetActive(true);
                 break;
-            
-            default:
+
+            case GameStatus.Win:
                 break;
+
+            default:break;
         }
     }
 

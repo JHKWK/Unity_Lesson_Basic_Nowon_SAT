@@ -8,6 +8,7 @@ public enum GameStatus
     MainMenu,
     PrepareToPlay,
     OnPlay,
+    PausePlay,
     Gameover,
     Win
 }
@@ -44,7 +45,7 @@ public class PlayManager : MonoBehaviour
 
     IEnumerator FirstSetup()
     {
-        yield return new WaitUntil(() => GUImain.instance != null);
+        yield return new WaitUntil(() => GUICanvasManager.instance != null);
         yield return new WaitUntil(() => StageManager.instance != null);
 
         ChangeGameStatusMainMenu();
@@ -55,36 +56,36 @@ public class PlayManager : MonoBehaviour
     {
         gameStatus = inputGameStatus;
 
-        GUImain.instance.PanelSetup();
+        GUICanvasManager.instance.PanelSetup();
 
         switch (gameStatus)
         {
             case GameStatus.MainMenu:
-                {
-                    GUImain.instance.PanelSetup();
-                    return;
-                }
+                GUICanvasManager.instance.PanelSetup();
+                break;
+
             case GameStatus.PrepareToPlay:
-                {
-                    GUImain.instance.PanelSetup();
-                    StageManager.instance.GenerateTiles();
-                    ChangeGameStatusOnPlay();
-                    return;
-                }
+                GUICanvasManager.instance.PanelSetup();
+                StageManager.instance.GenerateTiles();
+                break;
 
             case GameStatus.OnPlay:
-                {
-                    GUImain.instance.PanelSetup();
-                    return;
-                }
+                GUICanvasManager.instance.PanelSetup();
+                break;
+
+            case GameStatus.PausePlay:
+                GUICanvasManager.instance.PanelSetup();
+                break;
 
             case GameStatus.Gameover:
-                {
-                    GUImain.instance.PanelSetup();
-                    return;
-                }
+                GUICanvasManager.instance.PanelSetup();
+                break;
 
-            default: return;
+            case GameStatus.Win:
+                GUICanvasManager.instance.PanelSetup();
+                break;
+
+            default: break;
         }
     }
 

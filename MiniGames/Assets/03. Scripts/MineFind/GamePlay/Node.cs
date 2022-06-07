@@ -32,6 +32,7 @@ public class Node : MonoBehaviour
     public int num;
     public bool isOpened;
     public float EffectIntervalTime;
+    public bool isSetDone;
     public bool isFlaged 
     {
         get { return _isFlaged; }
@@ -54,22 +55,25 @@ public class Node : MonoBehaviour
     }
 
     bool _isFlaged;
-    float scale;
-    List<Node> arounds = new List<Node>();
+    [SerializeField] List<Node> arounds = new List<Node>();
+
+    private void Awake()
+    {
+        nodeType = NodeType.Num;
+    }
 
     public void Setup()
     {
-        StartCoroutine(E_Setup());
+         StartCoroutine(E_Setup());
     }
 
     IEnumerator E_Setup()
-    {        
+    {
         //기존 인스턴스 초기화
         arounds.Clear();
         yield return new WaitUntil( () => arounds.Count==0 );
 
         // 주소할당
-        scale = StageManager.instance.scale;
         _renderer = transform.Find("Renderer").GetComponent<Renderer>();
 
         //요소 초기화(활성)
@@ -81,57 +85,72 @@ public class Node : MonoBehaviour
         EffectPop.Stop();
         isOpened = false;
         isFlaged = false;
+        isSetDone = false;
         flag.gameObject.SetActive(false);
         mine.gameObject.SetActive(false);
         text.enabled = false;
 
         //주변타일인식
-        DetectAroundTiles();
-        yield return new WaitUntil(() => gameObject.GetComponent<Collider>().enabled = true);
+        if (nodeType == NodeType.Num)
+        {
+            yield return new WaitUntil(()=>DetectAroundTiles());
+            Debug.Log("Node.DetectAroundTiles Done");
+        }            
 
         // Number/Mine 셋업
         switch (nodeType)
         {
             case NodeType.Num:
-                SetNum();
-                if (num == 0) text.enabled = false;
-                if (num == 1) text.color = color1;
-                if (num == 2) text.color = color2;
-                if (num == 3) text.color = color3;
-                if (num == 4) text.color = color4;
-                if (num == 5) text.color = color5;
-                if (num == 6) text.color = color6;
-                if (num == 7) text.color = color7;
-                if (num == 8) text.color = color8;
-                text.text = num.ToString();
+                yield return new WaitUntil(() => SetNum());    
+                Debug.Log("Node.SetNum Done");
                 break;
 
             case NodeType.Mine:
+                Debug.Log("Node.SetMIne Done");
                 break;
         }
+
+        isSetDone = true;
+        StageManager.instance.TilesSetDone++;
         yield return null;
     }
 
-    void DetectAroundTiles()
+    bool DetectAroundTiles()
     {
         GetComponent<Collider>().enabled = false;
-        
-        Collider[] cols = Physics.OverlapSphere(transform.position, scale * 0.9f, layerMask);
+        Collider[] cols = Physics.OverlapSphere(transform.position, 1, layerMask);
         foreach (var sub in cols)
         {
             if (sub.TryGetComponent<Node>(out Node node))
                 arounds.Add(node);
         }
         GetComponent<Collider>().enabled = true;
+
+        return true;
     }
-    void SetNum() 
+    bool SetNum() 
     {
         num = 0;
+
         foreach (var sub in arounds)
         {
             if (sub.nodeType == NodeType.Mine)
                 num++;
         }
+
+        if (num == 0) text.enabled = false;
+        if (num == 1) text.color = color1;
+        if (num == 2) text.color = color2;
+        if (num == 3) text.color = color3;
+        if (num == 4) text.color = color4;
+        if (num == 5) text.color = color5;
+        if (num == 6) text.color = color6;
+        if (num == 7) text.color = color7;
+        if (num == 8) text.color = color8;
+
+        text.text = num.ToString();
+
+        return true;
     }
     void OpenTiles()
     {
@@ -142,7 +161,7 @@ public class Node : MonoBehaviour
         if (isFlaged == false)
         {
             isOpened = true;
-            StageManager.instance.OpenedTileCount++;
+            StageManager.instance.OpenedTilesCount++;
 
             if (num != 0)
                 text.enabled = true;
@@ -170,15 +189,12 @@ public class Node : MonoBehaviour
 
                 case NodeType.Mine:
                     _renderer.material = material_opened;
-                    _renderer.material.color = Color.red;
-                    // 지뢰 표시
-
                     mine.gameObject.SetActive(true);
                     PlayEffect();
-
-                    //게임오버이벤트 추후수정
                     yield return new WaitForSeconds(EffectIntervalTime * 10);
-                    PlayManager.instance.ChangeGameStatusGameOver();
+
+                    StageManager.instance.GameOver();
+                    
                     break;
 
                 default: break;
@@ -304,10 +320,4 @@ public class Node : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        scale = StageManager.instance.scale;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, scale * 0.9f);
-    }
 }
