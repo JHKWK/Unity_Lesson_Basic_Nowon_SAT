@@ -22,7 +22,7 @@ public class PlayManager : MonoBehaviour
         if(instance != null)
             Destroy(instance);
         instance = this;
-
+                
         StartCoroutine(FirstSetup());
     }
 
@@ -34,6 +34,10 @@ public class PlayManager : MonoBehaviour
     {
         ChangeGameStatus(GameStatus.PrepareToPlay);
     }
+    public void ChangeGameStatusPausePlay()
+    {
+        ChangeGameStatus(GameStatus.PausePlay);
+    }
     public void ChangeGameStatusOnPlay()
     {
         ChangeGameStatus(GameStatus.OnPlay);
@@ -42,13 +46,17 @@ public class PlayManager : MonoBehaviour
     {
         ChangeGameStatus(GameStatus.Gameover);
     }
+    public void ChangeGameStatusWin()
+    {
+        ChangeGameStatus(GameStatus.Win);
+    }
 
     IEnumerator FirstSetup()
     {
         yield return new WaitUntil(() => GUICanvasManager.instance != null);
-        yield return new WaitUntil(() => StageManager.instance != null);
+        ChangeGameStatus(GameStatus.Title);
 
-        ChangeGameStatusMainMenu();
+        yield return new WaitUntil(() => StageManager.instance != null);
 
         yield return null;
     }
@@ -60,6 +68,10 @@ public class PlayManager : MonoBehaviour
 
         switch (gameStatus)
         {
+            case GameStatus.Title:
+                GUICanvasManager.instance.PanelSetup();
+                break;
+
             case GameStatus.MainMenu:
                 GUICanvasManager.instance.PanelSetup();
                 break;

@@ -11,6 +11,7 @@ public class StageManager : MonoBehaviour
 
     // Main Camera
     [SerializeField] Camera gamePlayCamera;
+    [SerializeField] Transform background;
     // Node Prefab
     [SerializeField] Transform node;
 
@@ -138,8 +139,6 @@ public class StageManager : MonoBehaviour
         FlaggedTilesCount = 0;
         OpenedTilesCount = 0;
         GeneratedMinesCount = 0;
-        GUICanvasManager.instance.winButton.gameObject.SetActive(false);
-
         transform.localScale = Vector3.one;
         transform.position = Vector3.zero;
         tiles.transform.localPosition = Vector3.zero;
@@ -216,6 +215,8 @@ public class StageManager : MonoBehaviour
         gamePlayCamera.transform.position = new Vector3( (width-1) * 0.5f, (height-1) * 0.5f, -10);
         gamePlayCamera.transform.position += Vector3.up * (1 / scale);
         gamePlayCamera.orthographicSize = originalCameraorthographicSize / scale;
+        background.localScale = Vector3.one * 1f / scale;
+
     }
     bool CheckGameClear()
     {        
@@ -230,7 +231,7 @@ public class StageManager : MonoBehaviour
     //=========================
     void WinEvent()
     {
-        GUICanvasManager.instance.winButton.gameObject.SetActive(true);
+        PlayManager.instance.ChangeGameStatusWin();
     }
 
     public void GameOver()
