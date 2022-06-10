@@ -25,7 +25,10 @@ public class PlayManager : MonoBehaviour
                 
         StartCoroutine(FirstSetup());
     }
-
+    public void ChangeGameStatusTitle()
+    {
+        ChangeGameStatus(GameStatus.Title);
+    }
     public void ChangeGameStatusMainMenu()
     {
         ChangeGameStatus(GameStatus.MainMenu);

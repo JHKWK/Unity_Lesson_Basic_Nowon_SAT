@@ -12,23 +12,10 @@ public class Node : MonoBehaviour
     [SerializeField] Transform flag;
     [SerializeField] Transform mine;
     [SerializeField] LayerMask layerMask;
-    [Header("머테리얼")]
-    [SerializeField] Material material_opened;
-    [SerializeField] Material material_unOpen;
-    [Header("렌더러")]
-    [SerializeField] Renderer _renderer;
+
     [Header("효과")]
     [SerializeField] ParticleSystem EffectExploding;
     [SerializeField] ParticleSystem EffectPop;
-    [Header("number 컬러셋")]
-    [SerializeField] Color color1;
-    [SerializeField] Color color2;
-    [SerializeField] Color color3;
-    [SerializeField] Color color4;
-    [SerializeField] Color color5;
-    [SerializeField] Color color6;
-    [SerializeField] Color color7;
-    [SerializeField] Color color8;
 
     public int num;
     public bool isOpened;
@@ -43,52 +30,63 @@ public class Node : MonoBehaviour
             {
                 if (value == true)
                 {
-                    flag.gameObject.SetActive(true);
+                    flag_renderer.enabled=true;
                 }
                     
                 if (value == false)
                 {
-                    flag.gameObject.SetActive(false);
+                    flag_renderer.enabled = false;
                 }
             }
             _isFlaged = value; 
         }
     }
 
+    Renderer tile_renderer;
+    Renderer flag_renderer;
+    Renderer mine_renderer;
     bool _isFlaged;
-    [SerializeField] List<Node> arounds = new List<Node>();
+    SkinInfo _skinInfo;
+
+    List<Node> arounds = new List<Node>();
 
     private void Awake()
     {
         nodeType = NodeType.Num;
+        tile_renderer = transform.Find("Renderer").GetComponent<Renderer>();
+        flag_renderer = flag.Find("Flag_Renderer").GetComponent<Renderer>();
+        mine_renderer = mine.Find("Mine_Renderer").GetComponent<Renderer>();
     }
 
-    public void Setup()
+    public void Setup(SkinInfo skinInfo)
     {
-         StartCoroutine(E_Setup());
+        _skinInfo = skinInfo;        
+        StartCoroutine(E_Setup());
     }
 
     IEnumerator E_Setup()
     {
+
         //기존 인스턴스 초기화
         arounds.Clear();
         yield return new WaitUntil( () => arounds.Count==0 );
 
-        // 주소할당
-        _renderer = transform.Find("Renderer").GetComponent<Renderer>();
-
         //요소 초기화(활성)
         EffectPop.gameObject.SetActive(true);
+        EffectPop.Stop();
         EffectExploding.gameObject.SetActive(true);
+        EffectExploding.Stop();
 
         //요소 초기화(비활성)
-        EffectExploding.Stop();
-        EffectPop.Stop();
+
         isOpened = false;
         isFlaged = false;
         isSetDone = false;
-        flag.gameObject.SetActive(false);
-        mine.gameObject.SetActive(false);
+        tile_renderer.material = _skinInfo.material_unOpen;
+        flag_renderer.material = _skinInfo.material_Flag;
+        mine_renderer.material = _skinInfo.material_Mine;
+        flag_renderer.enabled = false;
+        mine_renderer.enabled = false;
         text.enabled = false;
 
         //주변타일인식
@@ -140,14 +138,14 @@ public class Node : MonoBehaviour
         }
 
         if (num == 0) text.enabled = false;
-        if (num == 1) text.color = color1;
-        if (num == 2) text.color = color2;
-        if (num == 3) text.color = color3;
-        if (num == 4) text.color = color4;
-        if (num == 5) text.color = color5;
-        if (num == 6) text.color = color6;
-        if (num == 7) text.color = color7;
-        if (num == 8) text.color = color8;
+        if (num == 1) text.color = _skinInfo.color1;
+        if (num == 2) text.color = _skinInfo.color2;
+        if (num == 3) text.color = _skinInfo.color3;
+        if (num == 4) text.color = _skinInfo.color4;
+        if (num == 5) text.color = _skinInfo.color5;
+        if (num == 6) text.color = _skinInfo.color6;
+        if (num == 7) text.color = _skinInfo.color7;
+        if (num == 8) text.color = _skinInfo.color8;
 
         text.text = num.ToString();
 
@@ -162,7 +160,7 @@ public class Node : MonoBehaviour
         if (isFlaged == false)
         {
             isOpened = true;
-            StageManager.instance.OpenedTilesCount++;
+            tile_renderer.material = _skinInfo.material_opened;
 
             if (num != 0)
                 text.enabled = true;
@@ -170,9 +168,9 @@ public class Node : MonoBehaviour
             switch (nodeType)
             {
                 case NodeType.Num:
+                    StageManager.instance.OpenedNumsCount++;
                     if (num == 0)
                     {
-                        _renderer.material = material_opened;
                         yield return new WaitForSeconds(EffectIntervalTime);
 
                         foreach (var sub in arounds)
@@ -181,21 +179,18 @@ public class Node : MonoBehaviour
                                 sub.OpenTiles();
                         }
                     }
-                    else
-                        _renderer.material = material_opened;
+
                     PlayEffect();
                     yield return new WaitWhile(() => EffectPop.isPlaying);
                     EffectPop.gameObject.SetActive(false);
                     break;
 
                 case NodeType.Mine:
-                    _renderer.material = material_opened;
-                    mine.gameObject.SetActive(true);
+                    StageManager.instance.Heart--;
+                    StageManager.instance.OpenedMinesCount++;
+                    mine_renderer.enabled = true;
                     PlayEffect();
                     yield return new WaitForSeconds(EffectIntervalTime * 10);
-
-                    StageManager.instance.GameOver();
-                    
                     break;
 
                 default: break;
@@ -230,8 +225,10 @@ public class Node : MonoBehaviour
             int arrounflagCount = 0;
             foreach (var sub in arounds)
             {
-                if(sub.isFlaged == true)                
-                    arrounflagCount++;                
+                if (sub.isFlaged == true)
+                    arrounflagCount++;
+                else if (sub.isOpened && sub.nodeType == NodeType.Mine)
+                    arrounflagCount++;
             }
 
             if(arrounflagCount == num)
@@ -264,7 +261,7 @@ public class Node : MonoBehaviour
                         foreach (var sub in arounds)
                         {
                             if (sub.isOpened == false && sub.isFlaged == false)
-                                sub._renderer.material.color = Color.grey;
+                                sub.tile_renderer.material = _skinInfo.material_press;
                         }
                     }
                 }
@@ -274,7 +271,7 @@ public class Node : MonoBehaviour
                     foreach (var sub in arounds)
                     {
                         if (sub.isOpened == false && sub.isFlaged == false)
-                            sub._renderer.material = material_unOpen;
+                            sub.tile_renderer.material = _skinInfo.material_unOpen;
                     }
                 }
             }
@@ -315,7 +312,7 @@ public class Node : MonoBehaviour
                 foreach (var sub in arounds)
                 {
                     if (sub.isOpened == false && sub.isFlaged == false)
-                        sub._renderer.material = material_unOpen;
+                        sub.tile_renderer.material =_skinInfo.material_unOpen;
                 }
             }
         }

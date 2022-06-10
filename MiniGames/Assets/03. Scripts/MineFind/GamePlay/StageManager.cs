@@ -4,22 +4,56 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+/// <summary>
+/// 구현할것
+/// 
+///  Allclear 판단
+/// 
+/// 지뢰 밟았을때 이벤트
+/// 
+/// </summary>
+
+public enum StageStatus{ FirstStart, Retry, NextStage }
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
     public bool isSetAllTilseDone;
+    public StageStatus status;
 
-    [Header("난이도 (%)")]
-    [SerializeField] int difficulty;
-
+    [Header("설정")]
+    [SerializeField] int startHeart;
+    [SerializeField] int maxHeart;
+    
     // Main Camera
     [Header("오브젝트")]
     [SerializeField] Camera gamePlayCamera;
-    [SerializeField] Transform background;
-    // Node Prefab
+    [SerializeField] Transform background;    
     [SerializeField] Transform node;
 
-    //파라미터    
+    // Stag
+    [Header("스테이지 에셋")]
+    [SerializeField] List <StageInfo> stageInfos;
+    [SerializeField] List <SkinInfo> skinInfos;
+    SkinInfo _skinInfo;
+
+    //프로퍼티
+    public int Heart
+    {
+        get { return _heart; }
+        set
+        {
+            _heart = value;
+            if (_heart > maxHeart)
+            {
+                Heart = maxHeart;
+                TotalScore += 1000;
+            }
+            GUICanvasManager.instance.UpdateHearts(_heart);
+
+            if (_heart == 0)            
+                GameOver();            
+        }
+    }
     public int FlaggedTilesCount
     {
         get { return _flaggedTilesCount; }
@@ -27,7 +61,7 @@ public class StageManager : MonoBehaviour
         set
         {
             _flaggedTilesCount = value;
-            GUICanvasManager.instance.remainMinesCountText.text = (GeneratedMinesCount- FlaggedTilesCount).ToString();
+            GUICanvasManager.instance.remainMinesCountText.text = (GeneratedMinesCount - FlaggedTilesCount - OpenedMinesCount).ToString();
 
             if (CheckGameClear())
             {
@@ -41,16 +75,36 @@ public class StageManager : MonoBehaviour
         set
         {
             _genratedMinesCount = value;
-            GUICanvasManager.instance.remainMinesCountText.text = (GeneratedMinesCount - FlaggedTilesCount).ToString();
+            GUICanvasManager.instance.remainMinesCountText.text = GeneratedMinesCount.ToString();
         }
     }
-    public int OpenedTilesCount
+    public int OpenedNumsCount
     {
-        get { return _openedTilesCount; }
+        get { return _openedNumsCount; }
         set 
         {
-            _openedTilesCount = value;
-            GUICanvasManager.instance.openedTilesText.text = _openedTilesCount.ToString();
+            _openedNumsCount = value;
+
+            TotalScore += score;
+
+            GUICanvasManager.instance.openedTilesText.text = (_openedNumsCount+_opendeMinesCount).ToString();
+            if (CheckGameClear())
+            {
+                WinEvent();
+            }
+        }
+    }
+    public int OpenedMinesCount
+    {
+        get { return _opendeMinesCount; }
+        set
+        {
+            _opendeMinesCount = value;
+
+            TotalScore -= score;
+
+            GUICanvasManager.instance.openedTilesText.text = (_openedNumsCount + _opendeMinesCount).ToString();
+            GUICanvasManager.instance.remainMinesCountText.text = (GeneratedMinesCount - FlaggedTilesCount - OpenedMinesCount).ToString();
             if (CheckGameClear())
             {
                 WinEvent();
@@ -63,25 +117,69 @@ public class StageManager : MonoBehaviour
         set
         {
             _tilesSetDone = value;
-            if (_tilesSetDone == width*height)
+            if ( width*height != 0  &&  _tilesSetDone == width*height )
                 isSetAllTilseDone = true;
+        }
+    }
+    public int CurrentStage
+    {
+        get { return _currentStage; }
+        set 
+        {
+            _currentStage = value; 
+            if (CurrentStage+1 > stageInfos.Count)
+                CurrentStage = stageInfos.Count-1;
+        }
+    }
+    public int TotalScore
+    {
+        get { return _totalScore; }
+        set 
+        {
+            _totalScore = value; 
+            GUICanvasManager.instance.TotalScore.text = _totalScore.ToString();
+        }
+    }
+    public int ClearedStage
+    {
+        get { return _cleardStage; }
+
+        set
+        {
+            _cleardStage = value;
+
+            Debug.Log($"{_cleardStage}{stageInfos.Count}");
+
+            if(_cleardStage != 0 &&
+               _cleardStage == stageInfos.Count )
+            {
+                isLastStage = true;
+            }
         }
     }
 
     int _tilesSetDone;
     int _flaggedTilesCount;
     int _genratedMinesCount;
-    int _openedTilesCount;
+    int _openedNumsCount;
+    int _heart;
+    int _opendeMinesCount;
+    int _currentStage;
+    int _totalScore;
+    int _cleardStage;
 
     Transform tiles;
     Node[,] nodes;
 
     float originalCameraorthographicSize;
     float scale;
+
+    public bool isLastStage = false;
     int setMineCount;
     int width;
     int height;
     int totalTilesCount;
+    int score;
 
     private void Awake()
     {
@@ -94,21 +192,29 @@ public class StageManager : MonoBehaviour
         tiles.parent = transform;
         tiles.name = "Tiles";
     }
-    public void SetWH10x10(int a)
+    /// <summary>
+    ///  초기화
+    /// </summary>    
+    /// 
+    public void SetStageStatusFistPlay()
     {
-        width = a / 100;
-        height = a % 100;
-        totalTilesCount = width * height;
-
-        SetScale();
+        SetStageStatus(StageStatus.FirstStart);
     }
-    public void SetWH100x100(int a)
+    public void SetStageStatusRetry()
     {
-        width = a / 1000;
-        height = a % 1000;
-        totalTilesCount = width * height;
-
-        SetScale();
+        SetStageStatus(StageStatus.Retry);
+    }
+    public void SetStageStatusNextStage()
+    {
+        SetStageStatus(StageStatus.NextStage);
+    }
+    public void SetStageStatus(StageStatus input)
+    {
+        status = input;
+    }
+    public void SetStage(int i)
+    {
+        CurrentStage = i;
     }
     public bool DestroyTiles()
     {
@@ -127,32 +233,54 @@ public class StageManager : MonoBehaviour
     }
     public void GenerateTiles()
     {
+        isSetAllTilseDone = false;
         StartCoroutine(E_GenerateTilse());
     }
     IEnumerator E_GenerateTilse()
     {
-        Debug.Log($"StageManager.E_GenerateTilse() 시작");
-        isSetAllTilseDone = false;
-
-        //기존 타일 초기화        
-        Debug.Log($"StageManager. DestroyTiles 시작");
         yield return new WaitUntil(() => DestroyTiles());
-        Debug.Log($"StageManager. DestroyTiles 완료");
 
         TilesSetDone = 0;
         FlaggedTilesCount = 0;
-        OpenedTilesCount = 0;
+        OpenedNumsCount = 0;
+        OpenedMinesCount = 0;
         GeneratedMinesCount = 0;
         transform.localScale = Vector3.one;
         transform.position = Vector3.zero;
         tiles.transform.localPosition = Vector3.zero;
 
-        nodes = new Node[width, height];
+        if (status == StageStatus.NextStage) CurrentStage++;
 
-        ResetCamera();
+        _skinInfo = stageInfos[CurrentStage].skinInfo;
+        GUICanvasManager.instance.GenerateHearts(maxHeart, _skinInfo);
 
-        Debug.Log($"StageManager.타일 생성 시작");
+        switch (status)
+        {
+            case StageStatus.FirstStart:
+                Heart = startHeart;
+                TotalScore = 0;
+                ClearedStage = 0;
+                break;
+            case StageStatus.Retry:
+                Heart = startHeart;
+                TotalScore = 0;
+                ClearedStage = 0;
+                break;
+            case StageStatus.NextStage:
+                break;
+
+            default: break;
+        }
+
+        if(status!=StageStatus.Retry)
+        {
+            LoadStageinfo();
+            ResetScale();
+            ResetCamera();
+        }
+
         //TileNode 생성
+        nodes = new Node[width, height];
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -161,39 +289,45 @@ public class StageManager : MonoBehaviour
                 nodes[i, j] = tile.GetComponent<Node>();
             }
         }
-        Debug.Log($"StageManager.타일 생성 완료");
 
         //지뢰 생성
-        Debug.Log($"StageManager.지뢰배치 시작");
         for (int n = 0; n < setMineCount;)
         {
             int i = Random.Range(0, width);
             int j = Random.Range(0, height);
-            if ( nodes[i, j].nodeType == NodeType.Num )
+            if (nodes[i, j].nodeType == NodeType.Num)
             {
                 nodes[i, j].nodeType = NodeType.Mine;
                 GeneratedMinesCount++;
                 n++;
             }
         }
-        Debug.Log($"StageManager.지뢰배치 완료");
 
-        Debug.Log($"StageManager.All Node.Setup() 시작");
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                nodes[i, j].Setup();
+                nodes[i, j].Setup(stageInfos[CurrentStage].skinInfo);
             }
-        }        
-        yield return new WaitUntil(()=> isSetAllTilseDone);
-        Debug.Log($"StageManager.All Node.Setup() 완료");
-        Debug.Log($"StageManager.E_GenerateTilse() 종료");
+        }
+        yield return new WaitUntil(() => isSetAllTilseDone);
         PlayManager.instance.ChangeGameStatusOnPlay();
         yield return null;
     }
+    void LoadStageinfo()
+    {
+        int i = CurrentStage;
 
-    void SetScale()
+        width = stageInfos[i].StageSize;
+        height = width / 2;
+
+        score = stageInfos[i].Score;
+        Heart += stageInfos[i].bonusHeart;
+        setMineCount = stageInfos[i].MineCount;
+        totalTilesCount = width * height;
+
+    }
+    void ResetScale()
     {
         // 표준 size : 32x16
         if (width >= height * 2)
@@ -209,37 +343,42 @@ public class StageManager : MonoBehaviour
                 scale = 1f / (float)height * 16f;
             else scale = 1f;
         }
-
-        setMineCount = Mathf.RoundToInt(width * height * difficulty * 0.01f);
-
-        Debug.Log($" StageManager.SetWH 가로 : {width}, 세로 : {height}, 축적 : {scale}, 지뢰갯수설정 : {setMineCount}");
+        Debug.Log($" StageManager.SetWH 가로 : {width}, 세로 : {height}, 축적 : {scale}");
     }
     void ResetCamera()
-    {        
-        gamePlayCamera.transform.position = new Vector3( (width-1) * 0.5f, (height-1) * 0.5f, -10);
+    {
+        gamePlayCamera.transform.position = new Vector3((width - 1) * 0.5f, (height - 1) * 0.5f, -10);
         gamePlayCamera.transform.position += Vector3.up * (1 / scale);
         gamePlayCamera.orthographicSize = originalCameraorthographicSize / scale;
         background.localScale = Vector3.one * 1f / scale;
-
     }
+    /// <summary>
+    ///  게임 플레이 이벤트
+    /// </summary>
+    /// <returns></returns>
     bool CheckGameClear()
-    {        
-        if( _flaggedTilesCount +_openedTilesCount == totalTilesCount)
-            return true;
-        else
-            return false;
+    {
+        if (isSetAllTilseDone)
+        {
+            if (_flaggedTilesCount + _openedNumsCount + _opendeMinesCount == totalTilesCount)
+                return true;
+            else return false;
+        }
+
+        return false;
     }
 
-    //게임클리어 이벤트 추후수정
-    //=========================
-    //=========================
     void WinEvent()
     {
+        ClearedStage++;
         PlayManager.instance.ChangeGameStatusWin();
     }
 
-    public void GameOver()
+    void GameOver()
     {
         PlayManager.instance.ChangeGameStatusGameOver();
     }
+
 }
+
+

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf46896e34e71d54c9d2afdbd9e2f4f1, type: 3}
+  m_Name: Data_SkinSetInfo 2
+  m_EditorClassIdentifier: 
+  skinSetName: MarioSet
+  material_opened: {fileID: 2100000, guid: 0e8581e535840d04c9caf12f081de813, type: 2}
+  material_unOpen: {fileID: 2100000, guid: 53b77814e53c0b14db83138929a5c69c, type: 2}
+  material_press: {fileID: 2100000, guid: 8a8bc9fd1eafcb441bcb0455a59d5441, type: 2}
+  material_Flag: {fileID: 2100000, guid: 31ca844ae05fc0e48bae79ce606dc849, type: 2}
+  material_Mine: {fileID: 2100000, guid: 628f36b4fdde3144f94ecb6b312083d1, type: 2}
+  EffectExploding: {fileID: 1968404635141630505, guid: 099862437b4793547813c60ae3b9c9a6, type: 3}
+  EffectPop: {fileID: 5037284831859211911, guid: 5e6151e27df675b4cb992f1f66cbaf8f, type: 3}
+  color1: {r: 0, g: 0.08627451, b: 1, a: 1}
+  color2: {r: 0, g: 0.5294118, b: 0.039215688, a: 1}
+  color3: {r: 0.9803922, g: 0, b: 0, a: 1}
+  color4: {r: 0.03529412, g: 0, b: 0.50980395, a: 1}
+  color5: {r: 0.4039216, g: 0, b: 0.03137255, a: 1}
+  color6: {r: 0, g: 0.69803923, b: 0.5176471, a: 1}
+  color7: {r: 0.35686275, g: 0, b: 0.7176471, a: 1}
+  color8: {r: 0.5568628, g: 0.14509805, b: 0.42352945, a: 1}
+  font: {fileID: 12800000, guid: afaca6d5df57b834383b404bd42deb6e, type: 3}
+  lifePrefab: {fileID: 4747732066667531654, guid: 90ea244c3820ecd47ae61ccfb358571b, type: 3}
