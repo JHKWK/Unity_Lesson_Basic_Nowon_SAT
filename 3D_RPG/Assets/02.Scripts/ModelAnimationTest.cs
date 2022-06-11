@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ModelAnimationTest : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] Animator animator;
 
     private void Update()
     {
